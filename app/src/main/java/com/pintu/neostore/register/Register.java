@@ -230,7 +230,7 @@ public class Register extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<RegisterModel> call, Throwable t) {
-                System.out.println("-------------------------------------------------------");
+                System.out.println("---------------Edited------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
             }
