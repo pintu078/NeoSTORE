@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".register.Register"></activity>
         <activity android:name=".forgot.Forgot"></activity>
         <activity android:name=".login.Login">

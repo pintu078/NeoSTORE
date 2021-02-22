@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pintu.neostore.R;
+import com.pintu.neostore.forgot.Forgot;
 import com.pintu.neostore.register.Register;
 import com.pintu.neostore.register.RegisterAPI;
 import com.pintu.neostore.register.RegisterModel;
@@ -27,6 +29,7 @@ public class Login extends AppCompatActivity {
     private LoginAPI loginAPI;
 
     EditText UserName,Password;
+    TextView Forgot;
     Button Login;
     FloatingActionButton Fab;
 
@@ -42,6 +45,16 @@ public class Login extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.ed_password);
         Login =(Button)findViewById(R.id.btn_login);
         Fab = (FloatingActionButton)findViewById(R.id.fab);
+        Forgot = (TextView)findViewById(R.id.tv_forgot_pas_link);
+
+        Forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.forgot.Forgot.class);
+                startActivity(intent);
+            }
+        });
+
 
         Fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +84,9 @@ public class Login extends AppCompatActivity {
                         Password.setError("FIELD CANNOT BE EMPTY");
                     }
                 }else{
+
+                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
+                    startActivity(intent);
 
                     Gson gson = new GsonBuilder().serializeNulls().create();
                     Retrofit retrofit = new Retrofit.Builder()

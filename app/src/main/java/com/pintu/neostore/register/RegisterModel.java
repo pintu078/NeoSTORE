@@ -17,7 +17,7 @@ public class RegisterModel {
     private String confirm_password;
     @SerializedName("gender")
     private String gender;
-    @SerializedName("phone_no")
+        @SerializedName("phone_no")
     private String phone_no;
 
     public RegisterModel(String first_name, String last_name, String email, String password, String confirm_password, String gender, String phone_no) {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fe3f3f"
+    tools:context=".forgot.Forgot">
+
+    <TextView
+        android:id="@+id/tv_neoStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="NeoSTORE"
+        android:textColor="@color/textColor"
+        android:textSize="135px"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <EditText
+        android:id="@+id/ed_email"
+        android:layout_width="880px"
+        android:layout_height="120px"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="148px"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100px"
+        android:background="@drawable/stroke_box"
+        android:drawableLeft="@drawable/ic_vector_assest_person"
+        android:ems="10"
+        android:hint="Email Id"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_neoStore" />
+
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="880px"
+        android:layout_height="120px"
+        android:layout_marginTop="150px"
+        android:background="@drawable/rounded_button"
+        android:text="Submit"
+        android:textColor="#E91C1A"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_email" />
+
+
+    <TextView
+        android:id="@+id/tv_forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65px"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/textColor"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_submit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

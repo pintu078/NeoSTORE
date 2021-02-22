@@ -2,6 +2,7 @@ package com.pintu.neostore.register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -49,9 +52,10 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.register_main);
 //       getSupportActionBar().hide();
          TextView textView = findViewById(R.id.text);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Register");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    //    getSupportActionBar().setDisplayShowHomeEnabled(true);
+        actionBar.setTitle("Register");
 
 
 
@@ -84,6 +88,7 @@ public class Register extends AppCompatActivity {
                 Phones = Phone.getText().toString().trim();
                 System.out.println("-------------------------------------Data----------------------------------------");
                 System.out.println(Fnames+"  "+Lnames+"  "+Emails+"  "+Passwords+"  "+CPasswords+"  "+genders+"  "+Phones);
+
 
                 int isSelected_Gender = rdgGender.getCheckedRadioButtonId();
                 int isSelected_Chkbox = rdgChkbox.getCheckedRadioButtonId();
@@ -188,7 +193,7 @@ public class Register extends AppCompatActivity {
 
                     registerAPI = retrofit.create(RegisterAPI.class);
 
-                    createPost();
+                    createPostt();
 
                     System.out.println("---------------------------------Register-------------------------------------------");
 //                    AppConstant.mydatas.add(new MyData(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones));
@@ -200,15 +205,15 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private void createPost(){
+    private void createPostt(){
 //        Integer n = Integer.parseInt(Phones);
 //        System.out.println(n);
         RegisterModel registerModel = new RegisterModel(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones);
         System.out.println("-------------------------------------------------------");
         System.out.println(registerModel.getFirst_name());
 
-        Call<RegisterModel> call = registerAPI.createPost(registerModel);
-
+          Call<RegisterModel> call = registerAPI.createPost(registerModel.getFirst_name(),registerModel.getLast_name(),registerModel.getEmail(),registerModel.getPassword(),registerModel.getConfirm_password(),registerModel.getGender(),registerModel.getPhone_no());
+//        Call<RegisterModel> call = registerAPI.createPost(registerModel);
         call.enqueue(new Callback<RegisterModel>() {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
@@ -216,7 +221,7 @@ public class Register extends AppCompatActivity {
                     System.out.println("------------------UnSucessful------------------");
                     System.out.println(response.message());
                     System.out.println(response.code());
-                   // return;
+//                    return
               }
 //                RegisterModel postResponse = response.body();
 //
@@ -241,5 +246,11 @@ public class Register extends AppCompatActivity {
                 System.out.println("------------ff------UnSucessful------------------");
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
