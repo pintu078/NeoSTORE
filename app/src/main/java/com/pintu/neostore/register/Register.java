@@ -48,7 +48,13 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_main);
 //       getSupportActionBar().hide();
+         TextView textView = findViewById(R.id.text);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Register");
+
+
+
 
 
         FirstName = (EditText)findViewById(R.id.ed_first_name);
