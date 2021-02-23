@@ -10,54 +10,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pintu.neostore.R;
 
+import java.util.List;
+
 public class Home extends AppCompatActivity {
 
-    NavigationView nav;
-    ActionBarDrawerToggle toggle;
-    DrawerLayout drawerLayout;
-
-
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_main);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_main);
 
-       nav = (NavigationView)findViewById(R.id.navmenu);
-       drawerLayout  =(DrawerLayout)findViewById(R.id.drawer);
 
-       toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
-       drawerLayout.addDrawerListener(toggle);
-       toggle.syncState();
-
-       nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-           @Override
-           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-               switch (item.getItemId())
-               {
-                   case R.id.menu_myAccount:
-                       Toast.makeText(getApplicationContext(),"My Account",Toast.LENGTH_SHORT).show();
-                       drawerLayout.closeDrawer(GravityCompat.START);
-                       break;
-
-                   case R.id.menu_myLocation:
-                       Toast.makeText(getApplicationContext(),"My Location",Toast.LENGTH_SHORT).show();
-                       drawerLayout.closeDrawer(GravityCompat.START);
-                       break;
-
-                   case R.id.menu_myCart:
-                       Toast.makeText(getApplicationContext(),"My Cart",Toast.LENGTH_SHORT).show();
-                       drawerLayout.closeDrawer(GravityCompat.START);
-                       break;
-               }
-               return true;
-           }
-       });
     }
+
 }

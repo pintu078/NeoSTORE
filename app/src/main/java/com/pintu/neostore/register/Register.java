@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,7 +19,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.pintu.neostore.APIMsg;
 import com.pintu.neostore.R;
+import com.pintu.neostore.forgot.Forgot;
+import com.pintu.neostore.login.Login;
+
+import org.json.JSONObject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -32,6 +38,7 @@ import retrofit2.http.POST;
 public class Register extends AppCompatActivity {
 
     private  RegisterAPI registerAPI;
+    private APIMsg message;
 
     EditText FirstName,LastName,Email,Password,CPassword,Phone;
     TextView tvGenderEr, tvChkboxEr;
@@ -100,12 +107,12 @@ public class Register extends AppCompatActivity {
                             tvGenderEr.setVisibility(View.GONE);
                             tvGenderEr.setError(null);
                             System.out.println("---------------------------------------------"+genders);
-                            genders = Male.getText().toString();
+                            genders = Male.getText().toString().substring(0,1);
                             System.out.println("---------------------------------------------"+genders);
                         }else if(Female.isChecked()){
                             tvGenderEr.setVisibility(View.GONE);
                             tvGenderEr.setError(null);
-                            genders = Female.getText().toString();
+                            genders = Female.getText().toString().substring(0,1);
                         }
                         if(rbcheckbox.isChecked()){
                             tvChkboxEr.setVisibility(View.GONE);
@@ -178,12 +185,15 @@ public class Register extends AppCompatActivity {
                 } else{
                     if(Male.isChecked()){
                         System.out.println("---------------------------------------------"+genders);
-                        genders = Male.getText().toString();
+                        genders = Male.getText().toString().substring(0,1);
                         System.out.println("---------------------------------------------"+genders);
                     }else if(Female.isChecked()){
-                        genders = Female.getText().toString();
+                        genders = Female.getText().toString().substring(0,1);
                         System.out.println("---------------------------------------------"+genders);
                     }
+
+                    System.out.println("-------------------------------------Data----------------------------------------");
+                    System.out.println(Fnames+"  "+Lnames+"  "+Emails+"  "+Passwords+"  "+CPasswords+"  "+genders+"  "+Phones);
 
                     Gson gson = new GsonBuilder().serializeNulls().create();
                     Retrofit retrofit = new Retrofit.Builder()
@@ -210,19 +220,27 @@ public class Register extends AppCompatActivity {
 //        System.out.println(n);
         RegisterModel registerModel = new RegisterModel(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones);
         System.out.println("-------------------------------------------------------");
-        System.out.println(registerModel.getFirst_name());
+        System.out.println(registerModel.getGender());
 
-          Call<RegisterModel> call = registerAPI.createPost(registerModel.getFirst_name(),registerModel.getLast_name(),registerModel.getEmail(),registerModel.getPassword(),registerModel.getConfirm_password(),registerModel.getGender(),registerModel.getPhone_no());
+          Call<APIMsg> call = registerAPI.createPost(registerModel.getFirst_name(),registerModel.getLast_name(),registerModel.getEmail(),registerModel.getPassword(),registerModel.getConfirm_password(),registerModel.getGender(),registerModel.getPhone_no());
 //        Call<RegisterModel> call = registerAPI.createPost(registerModel);
-        call.enqueue(new Callback<RegisterModel>() {
+        call.enqueue(new Callback<APIMsg>() {
             @Override
-            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-                if(!response.isSuccessful()){
-                    System.out.println("------------------UnSucessful------------------");
-                    System.out.println(response.message());
-                    System.out.println(response.code());
-//                    return
-              }
+            public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
+                if(response.isSuccessful()){
+
+                    Toast.makeText(Register.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        Toast.makeText(
+                                Register.this,
+                                jObjError.getString("user_msg"),
+                                Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
 //                RegisterModel postResponse = response.body();
 //
 //                String content = "";
@@ -237,10 +255,13 @@ public class Register extends AppCompatActivity {
 
 //                System.out.println("--------------------------------------------------------------------------------------------------");
 //                System.out.println(response.code());
+//                System.out.println(response.message());
 //                System.out.println(content);
+
             }
             @Override
-            public void onFailure(Call<RegisterModel> call, Throwable t) {
+            public void onFailure(Call<APIMsg> call, Throwable t) {
+                Toast.makeText(Register.this,"Check Internet Connection",Toast.LENGTH_LONG).show();
                 System.out.println("---------------Edited------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");

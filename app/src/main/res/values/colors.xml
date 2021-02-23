@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="titleBar">#e91b1a</color>
     <color name="textColor">#FFFFFF</color>
+    <color name="white">#F0EDED</color>
 </resources>
