@@ -1,4 +1,4 @@
-package com.pintu.neostore.register;
+package com.pintu.neostore.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

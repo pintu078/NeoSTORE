@@ -1,44 +1,32 @@
 package com.pintu.neostore.register;
 
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.pintu.neostore.APIMsg;
+import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.R;
-import com.pintu.neostore.forgot.Forgot;
-import com.pintu.neostore.login.Login;
 
-import org.json.JSONObject;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.POST;
+import com.pintu.neostore.viewmodel.RegisterVM;
+import com.pintu.neostore.viewmodel.RegisterVMFactory;
 
 
 public class Register extends AppCompatActivity {
 
-    private  RegisterAPI registerAPI;
+
     private APIMsg message;
+    RegisterVM registerVM;
 
     EditText FirstName,LastName,Email,Password,CPassword,Phone;
     TextView tvGenderEr, tvChkboxEr;
@@ -59,10 +47,15 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.register_main);
 //       getSupportActionBar().hide();
          TextView textView = findViewById(R.id.text);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    //    getSupportActionBar().setDisplayShowHomeEnabled(true);
-        actionBar.setTitle("Register");
+
+         ImageButton imgbtn = findViewById(R.id.imgbtn);
+
+         imgbtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Register.super.onBackPressed();
+             }
+         });
 
 
 
@@ -83,6 +76,21 @@ public class Register extends AppCompatActivity {
         rbcheckbox = (RadioButton)findViewById(R.id.chkbox);
         tvChkboxEr = (TextView) findViewById(R.id.tv_chkbox);
 
+        registerVM = new ViewModelProvider(this,new RegisterVMFactory(this)).get(RegisterVM.class);
+        registerVM.getLoginListObserver().observe(this, new Observer<APIMsg>() {
+            @Override
+            public void onChanged(APIMsg apiMsg) {
+                System.out.println("---------1-------");
+                if(apiMsg != null){
+                    System.out.println("---------2-------");
+                }else{
+                    System.out.println("---------3-------");
+
+                }
+            }
+
+        });
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +103,7 @@ public class Register extends AppCompatActivity {
                 Phones = Phone.getText().toString().trim();
                 System.out.println("-------------------------------------Data----------------------------------------");
                 System.out.println(Fnames+"  "+Lnames+"  "+Emails+"  "+Passwords+"  "+CPasswords+"  "+genders+"  "+Phones);
+                Drawable icon = getResources().getDrawable(R.drawable.ic_error);
 
 
                 int isSelected_Gender = rdgGender.getCheckedRadioButtonId();
@@ -126,6 +135,9 @@ public class Register extends AppCompatActivity {
                     if(Fnames.length()==0){
                         FirstName.requestFocus();
                         FirstName.setError("FIELD CANNOT BE EMPTY");
+//                        FirstName.setError(("FIELD CANNOT BE EMPTY"),getResources().getDrawable(R.drawable.ic_error));
+//                        FirstName.requestFocus();
+//                          FirstName.setError(Html.fromHtml("<font bgcolor=white >this is the error</font>"));
                     }else if(Fnames.length()!=0 && !Fnames.matches(namePattern)){
                         FirstName.requestFocus();
                         FirstName.setError("ENTER ONLY ALPHABETICAL CHARACTER");
@@ -195,15 +207,7 @@ public class Register extends AppCompatActivity {
                     System.out.println("-------------------------------------Data----------------------------------------");
                     System.out.println(Fnames+"  "+Lnames+"  "+Emails+"  "+Passwords+"  "+CPasswords+"  "+genders+"  "+Phones);
 
-                    Gson gson = new GsonBuilder().serializeNulls().create();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://staging.php-dev.in:8844/trainingapp/api/users/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    registerAPI = retrofit.create(RegisterAPI.class);
-
-                    createPostt();
+                    registerVM.makeRegisterApiCall(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones);
 
                     System.out.println("---------------------------------Register-------------------------------------------");
 //                    AppConstant.mydatas.add(new MyData(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones));
@@ -213,65 +217,5 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void createPostt(){
-//        Integer n = Integer.parseInt(Phones);
-//        System.out.println(n);
-        RegisterModel registerModel = new RegisterModel(Fnames,Lnames,Emails,Passwords,CPasswords,genders,Phones);
-        System.out.println("-------------------------------------------------------");
-        System.out.println(registerModel.getGender());
-
-          Call<APIMsg> call = registerAPI.createPost(registerModel.getFirst_name(),registerModel.getLast_name(),registerModel.getEmail(),registerModel.getPassword(),registerModel.getConfirm_password(),registerModel.getGender(),registerModel.getPhone_no());
-//        Call<RegisterModel> call = registerAPI.createPost(registerModel);
-        call.enqueue(new Callback<APIMsg>() {
-            @Override
-            public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
-                if(response.isSuccessful()){
-
-                    Toast.makeText(Register.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(
-                                Register.this,
-                                jObjError.getString("user_msg"),
-                                Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }
-//                RegisterModel postResponse = response.body();
-//
-//                String content = "";
-//                content += "Code: " + response.code()+ "\n";
-//                content += "First Name: " + postResponse.getFirst_name() + "\n";
-//                content += "Last Name: " + postResponse.getLast_name() + "\n";
-//                content += "Email : " + postResponse.getEmail() + "\n";
-//                content += "Password : " + postResponse.getPassword() + "\n";
-//                content += "Con Password : " + postResponse.getConfirm_password() + "\n";
-//                content += "Gender  : " + postResponse.getGender() + "\n";
-//                content += "Phone no : " + postResponse.getPhone_no() + "\n\n";
-
-//                System.out.println("--------------------------------------------------------------------------------------------------");
-//                System.out.println(response.code());
-//                System.out.println(response.message());
-//                System.out.println(content);
-
-            }
-            @Override
-            public void onFailure(Call<APIMsg> call, Throwable t) {
-                Toast.makeText(Register.this,"Check Internet Connection",Toast.LENGTH_LONG).show();
-                System.out.println("---------------Edited------------------------------------------");
-                System.out.println(t.getMessage());
-                System.out.println("------------ff------UnSucessful------------------");
-            }
-        });
-    }
-
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
     }
 }

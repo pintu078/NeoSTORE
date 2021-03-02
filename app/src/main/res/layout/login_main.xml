@@ -1,137 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fe3f3f"
-    android:scrollbars="vertical"
-    tools:context=".login.Login">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_neoStore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="NeoSTORE"
-        android:textColor="@color/textColor"
-        android:textSize="135px"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+    <data>
 
-    <EditText
-        android:id="@+id/ed_username"
-        android:layout_width="880px"
-        android:layout_height="120px"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="148px"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100px"
-        android:background="@drawable/stroke_box"
-        android:drawableLeft="@drawable/ic_vector_assest_person"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="text"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_neoStore" />
+        <variable
+            name="LoginViewModel"
+            type="com.pintu.neostore.viewmodel.LoginVM"/>
+    </data>
 
 
-    <EditText
-        android:id="@+id/ed_password"
-        android:layout_width="880px"
-        android:layout_height="120px"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="40px"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100px"
-        android:background="@drawable/stroke_box"
-        android:drawableLeft="@drawable/ic_vector_assest_lock"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_username" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fe3f3f"
+        tools:context=".login.Login">
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="880px"
-        android:layout_height="120px"
-        android:layout_marginTop="100px"
-        android:background="@drawable/rounded_button"
-        android:text="LOGIN"
-        android:textColor="#E91C1A"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_password" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fe3f3f"
+            android:scrollbars="vertical"
+            android:paddingBottom="20dp"
+            tools:context=".login.Login">
 
 
-    <TextView
-        android:id="@+id/tv_forgot_pas_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65px"
-        android:gravity="center_horizontal"
-        android:text="Forgot Password ?"
-        android:textColor="@color/textColor"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+            <TextView
+                android:id="@+id/tv_neoStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="NeoSTORE"
+                android:textColor="@color/textColor"
+                android:textSize="51sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.12" />
+
+            <EditText
+                android:id="@+id/ed_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/stroke_box"
+                android:drawableLeft="@drawable/ic_vector_assest_person"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_neoStore" />
 
 
-    <TextView
-        android:id="@+id/tv_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40px"
-        android:layout_marginTop="228dp"
-        android:gravity="center_horizontal"
-        android:text="DONT HAVE AN ACCOUNT ?"
-        android:textColor="@color/textColor"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forgot_pas_link" />
+            <EditText
+                android:id="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/stroke_box"
+                android:drawableLeft="@drawable/ic_vector_assest_lock"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_username" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="296dp"
-        android:backgroundTint="#bb0100"
-        android:clickable="true"
-        app:borderWidth="0dp"
-        app:shapeAppearanceOverlay="@drawable/ic_vector_assest_plus"
-        android:src="@drawable/ic_vector_assest_plus"
-        app:layout_constraintStart_toEndOf="@+id/tv_account"
-        app:layout_constraintTop_toTopOf="@+id/btn_login"
-        />
+            <Button
+
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/rounded_button"
+                android:text="LOGIN"
+                android:textColor="#E91C1A"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_password" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_forgot_pas_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center_horizontal"
+                android:text="Forgot Password ?"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="205dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:text="DONT HAVE AN ACCOUNT ?"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.088"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_forgot_pas_link"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="285dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:backgroundTint="#bb0100"
+                android:clickable="true"
+                android:src="@drawable/ic_vector_assest_plus"
+                app:borderWidth="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_account"
+                app:layout_constraintTop_toTopOf="@+id/btn_login"
+                app:shapeAppearanceOverlay="@style/fab_square" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
+
 

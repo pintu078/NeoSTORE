@@ -1,4 +1,4 @@
-package com.pintu.neostore.login;
+package com.pintu.neostore.model;
 
 public class LoginModel {
 
@@ -16,5 +16,13 @@ public class LoginModel {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

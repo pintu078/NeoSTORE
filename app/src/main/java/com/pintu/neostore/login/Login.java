@@ -3,32 +3,35 @@ package com.pintu.neostore.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.pintu.neostore.APIMsg;
+import com.pintu.neostore.forgot.Forgot;
+import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.R;
+import com.pintu.neostore.databinding.LoginMainBinding;
+import com.pintu.neostore.model.LoginModel;
 import com.pintu.neostore.register.Register;
+import com.pintu.neostore.viewmodel.LoginVM;
+import com.pintu.neostore.viewmodel.LoginVMFactory;
 
-import org.json.JSONObject;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
 
-    private LoginAPI loginAPI;
-    private APIMsg message;
+    private LoginVM loginVM;
+    LoginMainBinding binding;
+
 
     EditText UserName,Password;
     TextView Forgot;
@@ -36,18 +39,44 @@ public class Login extends AppCompatActivity {
     FloatingActionButton Fab;
 
     String UserNames,Passwords;
-    String namePattern = "[a-zA-Z]+";
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.login_main);
-        getSupportActionBar().hide();
+// getSupportActionBar().hide();
+
 
         UserName = (EditText)findViewById(R.id.ed_username);
         Password = (EditText)findViewById(R.id.ed_password);
         Login =(Button)findViewById(R.id.btn_login);
         Fab = (FloatingActionButton)findViewById(R.id.fab);
         Forgot = (TextView)findViewById(R.id.tv_forgot_pas_link);
+
+
+        
+        loginVM = new ViewModelProvider(this,new LoginVMFactory(this)).get(LoginVM.class);
+//        binding = DataBindingUtil.setContentView(com.pintu.neostore.login.Login.this,R.layout.login_main);
+//        binding.setLoginViewModel(loginVM);
+        loginVM.getLoginListObserver().observe(this, new Observer<APIMsg>() {
+            @Override
+            public void onChanged(APIMsg apiMsg) {
+                System.out.println("---------1-------");
+                if(apiMsg != null){
+                    System.out.println("---------2-------");
+                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
+                    startActivity(intent);
+                }else{
+                    System.out.println("---------3-------");
+
+                }
+            }
+
+        });
+        System.out.println("---------4-------");
+
 
         Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,15 +100,15 @@ public class Login extends AppCompatActivity {
                 UserNames = UserName.getText().toString().trim();
                 Passwords = Password.getText().toString().trim();
 
-                if(UserNames.length()==0 || Passwords.length()==0){
+                if(UserNames.length()==0 || Passwords.length()==0 || !UserNames.matches(emailPattern)){
 
 
                     if(UserNames.length()==0){
-                       UserName.requestFocus();
-                        UserName.setError("FIELD CANNOT BE EMPTY");
-                    }else if(UserNames.length()!=0 && !UserNames.matches(namePattern)){
                         UserName.requestFocus();
-                        UserName.setError("ENTER ONLY ALPHABETICAL CHARACTER");
+                        UserName.setError("FIELD CANNOT BE EMPTY");
+                    }else if(UserNames.length()!=0 && !UserNames.matches(emailPattern)){
+                        UserName.requestFocus();
+                        UserName.setError("ENTER VALID USERNAME");
                     }
                     if(Passwords.length()==0){
                         Password.requestFocus();
@@ -87,75 +116,12 @@ public class Login extends AppCompatActivity {
                     }
                 }else{
 
+                    loginVM.makeApiCall(UserNames,Passwords);
+
 //                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
 //                    startActivity(intent);
 
-                    Gson gson = new GsonBuilder().serializeNulls().create();
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://staging.php-dev.in:8844/trainingapp/api/users/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    loginAPI = retrofit.create(LoginAPI.class);
-
-                    createLogin();
                 }
-
-            }
-        });
-    }
-
-    private void createLogin(){
-//        int n = Integer.parseInt(Phones);
-//        System.out.println(n);
-
-       LoginModel loginModel = new LoginModel(UserNames,Passwords);
-        System.out.println("-------------------------------------------------------");
-        System.out.println(loginModel.getEmail());
-
-        Call<APIMsg> call = loginAPI.createLogin(UserNames,Passwords);
-
-        call.enqueue(new Callback<APIMsg>() {
-            @Override
-            public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
-                if(response.isSuccessful()){
-
-                 //   message=new Gson().fromJson(response.errorBody().charStream(),APIMsg.class);
-                   // Toast.makeText(Login.this,""+message.getUser_msg(),Toast.LENGTH_LONG).show();
-//                    System.out.println("------------------UnSucessful------------------");
-//                    System.out.println(response.code());
-//                    System.out.println(response.message());
-                    APIMsg postResponse = response.body();
-//
-                    String content = "";
-                    content += "Code: " + response.code()+ "\n";
-                    content += "Email : " + postResponse.getMessage() + "\n";
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-//                System.out.println(response.code());
-//                System.out.println(postResponse.getMessage());
-//                System.out.println(response.body());
-                    Toast.makeText(Login.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-
-                } else {
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        Toast.makeText(
-                                Login.this,
-                                jObjError.getString("user_msg"),
-                                Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            }
-            @Override
-            public void onFailure(Call<APIMsg> call, Throwable t) {
-
-                Toast.makeText(Login.this,"Check Internet Connection",Toast.LENGTH_LONG).show();
-                System.out.println("-------------------------------------------------------");
-                System.out.println(t.getMessage());
-                System.out.println("------------ff------UnSucessful------------------");
             }
         });
     }

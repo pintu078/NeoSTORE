@@ -1,4 +1,4 @@
-package com.pintu.neostore.forgot;
+package com.pintu.neostore.model;
 
 public class ForgotModel {
 

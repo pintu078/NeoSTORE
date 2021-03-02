@@ -1,18 +1,22 @@
-package com.pintu.neostore.register;
+package com.pintu.neostore.network;
 
-import com.pintu.neostore.APIMsg;
+import com.pintu.neostore.model.APIMsg;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public interface RegisterAPI {
+public interface APIService {
 
+    @FormUrlEncoded
+    @POST("login")
+    Call<APIMsg> createLogin(@Field("email") String email,
+                             @Field("password") String password );
 
-//    @POST("register")
-//    Call<RegisterModel> createPost(@Body RegisterModel registerModel);
+    @FormUrlEncoded
+    @POST("forgot")
+    Call<APIMsg> createForgot(@Field("email") String email);
 
     @FormUrlEncoded
     @POST("register")
