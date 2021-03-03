@@ -1,15 +1,22 @@
 package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.home.Home;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.model.LoginModel;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
+import com.pintu.neostore.register.AppConstant;
+import com.pintu.neostore.register.MyData;
 
 import org.json.JSONObject;
 
@@ -53,7 +60,25 @@ public class LoginVM extends ViewModel {
             public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
                 if(response.isSuccessful()){
 
-                    loginList.postValue(response.body());
+                   loginList.postValue(response.body());
+                    APIMsg postResponse = response.body();
+                    String content = "";
+                    content += "Code: " + response.code()+ "\n";
+                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+                    content += "Last Name: " + postResponse.getData().getFirstName() + "\n";
+                    String F =  postResponse.getData().getFirstName();
+                    String L =  postResponse.getData().getLastName();
+                    String E =  postResponse.getData().getEmail();
+                    String G =  postResponse.getData().getGender();
+                    String Ph =  postResponse.getData().getPhoneNo();
+//                    if(AppConstant.mydatas.isEmpty()){
+//                        AppConstant.mydatas.add(new MyData(F,L,E,G,Ph));
+//                    }else {
+//                        AppConstant.mydatas.remove(0);
+//                        System.out.println(content);
+                        AppConstant.mydatas.add(0,new MyData(F,L,E,G,Ph));
+                  //  }
                     System.out.println("--------------------------------------------SUccess------------------------------------------------------");
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);

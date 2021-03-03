@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_myCart"
-            android:title="My Cart"
-            android:icon="@drawable/ic_vector_assest_shopping_cart_24"/>
+            android:icon="@drawable/ic_vector_assest_shopping_cart_24"
+            android:title="My Cart" />
 
         <item
             android:id="@+id/nav_Table"
-            android:title="Tables"
-            android:icon="@drawable/ic_vector_assest_person"/>
+            android:icon="@drawable/ic__905821"
+            android:title="Tables" />
         <item
             android:id="@+id/nav_Sofa"
-            android:title="Sofas"
-            android:icon="@drawable/ic_vector_assest_person"/>
+            android:icon="@drawable/sofa_24"
+            android:title="Sofas" />
         <item
             android:id="@+id/nav_chair"
-            android:title="Chairs"
-            android:icon="@drawable/ic_vector_assest_person"/>
+            android:icon="@drawable/ic_baseline_chair"
+            android:title="Chairs" />
         <item
             android:id="@+id/nav_cupboard"
-            android:title="Cupboards"
-            android:icon="@drawable/ic_vector_assest_person"/>
+            android:icon="@drawable/cupboard"
+            android:title="Cupboards" />
         <item
             android:id="@+id/nav_myAccount"
-            android:title="My Account"
-            android:icon="@drawable/ic_vector_assest_person"/>
+            android:icon="@drawable/ic_vector_assest_person"
+            android:title="My Account" />
         <item
             android:id="@+id/nav_location"
-            android:title="Store Locator"
-            android:icon="@drawable/ic_vector_assest_location_on"/>
+            android:icon="@drawable/ic_vector_assest_location_on"
+            android:title="Store Locator" />
         <item
             android:id="@+id/nav_myOrders"
-            android:title="My Orders"
-            android:icon="@drawable/ic_vector_assest_location_on"/>
+            android:icon="@drawable/myorder"
+            android:title="My Orders" />
         <item
             android:id="@+id/nav_logout"
-            android:title="Logout"
-            android:icon="@drawable/ic_vector_assest_location_on"/>
+            android:icon="@drawable/logout"
+            android:title="Logout" />
     </group>
 
 </menu>
