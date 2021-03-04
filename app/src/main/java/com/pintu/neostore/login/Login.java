@@ -1,6 +1,7 @@
 package com.pintu.neostore.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,7 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pintu.neostore.forgot.Forgot;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.R;
-import com.pintu.neostore.databinding.LoginMainBinding;
 import com.pintu.neostore.model.LoginModel;
 import com.pintu.neostore.register.Register;
 import com.pintu.neostore.viewmodel.LoginVM;
@@ -30,7 +30,7 @@ import com.pintu.neostore.viewmodel.LoginVMFactory;
 public class Login extends AppCompatActivity {
 
     private LoginVM loginVM;
-    LoginMainBinding binding;
+  //  LoginMainBinding binding;
 
 
     EditText UserName,Password;
@@ -66,6 +66,22 @@ public class Login extends AppCompatActivity {
                 System.out.println("---------1-------");
                 if(apiMsg != null){
                     System.out.println("---------2-------");
+                    String F = apiMsg.getData().getFirstName();
+                    String L = apiMsg.getData().getLastName();
+                    String U = apiMsg.getData().getUsername();
+                    String E = apiMsg.getData().getEmail();
+                    String G = apiMsg.getData().getGender();                   String P = apiMsg.getData().getPhoneNo();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.putString("FName", F.toUpperCase());
+                    myEdit.putString("LName", L.toUpperCase());
+                    myEdit.putString("UName", U);
+                    myEdit.putString("Email", E);
+                    myEdit.putString("Gender", G);
+                    myEdit.putString("Phone", P);
+                    myEdit.commit();
+
                     Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
                     startActivity(intent);
                 }else{

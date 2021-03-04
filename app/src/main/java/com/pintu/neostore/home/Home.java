@@ -1,7 +1,9 @@
 package com.pintu.neostore.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,7 +45,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     ViewPager mViewPager;
 
     // images array
-    int[] images = {R.drawable.bed,R.drawable.beds,R.drawable.chairs,R.drawable.dinning,R.drawable.cupboards};
+    int[] images = {R.drawable.beds,R.drawable.sofas,R.drawable.cupboards,R.drawable.tabels,R.drawable.chairs};
 
 
     ViewPagerAdapter mViewPagerAdapter;
@@ -68,7 +70,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
          setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Home");
+    //    getSupportActionBar().setTitle("NeoSTORE");
 
 
         mViewPager = (ViewPager)findViewById(R.id.viewpager);
@@ -79,10 +81,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         // Adding the Adapter to the ViewPager
         mViewPager.setAdapter(mViewPagerAdapter);
 
-        MyData myData = AppConstant.mydatas.get(0);
-        System.out.println("------home----"+myData.FnameD);
-        per.setText(myData.FnameD+" "+myData.LnameD);
-        ema.setText(myData.EmailD);
+//        MyData myData = AppConstant.mydatas.get(0);
+//        System.out.println("------home----"+myData.FnameD);
+//        per.setText(myData.FnameD+" "+myData.LnameD);
+//        ema.setText(myData.EmailD);
+
+        SharedPreferences sp = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        per.setText(sp.getString("FName","")+" "+sp.getString("LName",""));
+        ema.setText(sp.getString("Email",""));
+
 
 
         /*----------------------Navigation Drawer Menu-------------------------*/

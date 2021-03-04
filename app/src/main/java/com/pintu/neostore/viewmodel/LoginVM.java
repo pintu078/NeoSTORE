@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,9 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class LoginVM extends ViewModel {
 
@@ -61,26 +65,23 @@ public class LoginVM extends ViewModel {
                 if(response.isSuccessful()){
 
                    loginList.postValue(response.body());
-                    APIMsg postResponse = response.body();
-                    String content = "";
-                    content += "Code: " + response.code()+ "\n";
-                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
-                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
-                    content += "Last Name: " + postResponse.getData().getFirstName() + "\n";
-                    String F =  postResponse.getData().getFirstName();
-                    String L =  postResponse.getData().getLastName();
-                    String E =  postResponse.getData().getEmail();
-                    String G =  postResponse.getData().getGender();
-                    String Ph =  postResponse.getData().getPhoneNo();
-//                    if(AppConstant.mydatas.isEmpty()){
-//                        AppConstant.mydatas.add(new MyData(F,L,E,G,Ph));
-//                    }else {
-//                        AppConstant.mydatas.remove(0);
-//                        System.out.println(content);
-                        AppConstant.mydatas.add(0,new MyData(F,L,E,G,Ph));
-                  //  }
+//                    APIMsg postResponse = response.body();
+//                    String content = "";
+//                    content += "Code: " + response.code()+ "\n";
+//                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+//                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+//                    content += "Last Name: " + postResponse.getData().getFirstName() + "\n";
+//                    String F =  postResponse.getData().getFirstName();
+//                    String L =  postResponse.getData().getLastName();
+//                    String E =  postResponse.getData().getEmail();
+//                    String G =  postResponse.getData().getGender();
+//                    String Ph =  postResponse.getData().getPhoneNo();
+//                    AppConstant.mydatas.add(0,new MyData(F,L,E,G,Ph));
+
+                 
                     System.out.println("--------------------------------------------SUccess------------------------------------------------------");
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
 //                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
 //                    startActivity(intent);
 
@@ -98,6 +99,8 @@ public class LoginVM extends ViewModel {
                     }
                 }
             }
+
+
             @Override
             public void onFailure(Call<APIMsg> call, Throwable t) {
 
@@ -106,7 +109,9 @@ public class LoginVM extends ViewModel {
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
             }
+
         });
+
     }
 
 }
