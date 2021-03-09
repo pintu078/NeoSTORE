@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
     private LoginVM loginVM;
   //  LoginMainBinding binding;
 
-
+    public static final String PREFS_NAME = "MyLoginPrefsFile";
     EditText UserName,Password;
     TextView Forgot;
     Button Login;
@@ -70,9 +70,10 @@ public class Login extends AppCompatActivity {
                     String L = apiMsg.getData().getLastName();
                     String U = apiMsg.getData().getUsername();
                     String E = apiMsg.getData().getEmail();
-                    String G = apiMsg.getData().getGender();                   String P = apiMsg.getData().getPhoneNo();
+                    String G = apiMsg.getData().getGender();
+                    String P = apiMsg.getData().getPhoneNo();
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
                     myEdit.putString("FName", F.toUpperCase());
                     myEdit.putString("LName", L.toUpperCase());
@@ -80,6 +81,7 @@ public class Login extends AppCompatActivity {
                     myEdit.putString("Email", E);
                     myEdit.putString("Gender", G);
                     myEdit.putString("Phone", P);
+                    myEdit.putBoolean("hasLoggedIn",true);
                     myEdit.commit();
 
                     Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);

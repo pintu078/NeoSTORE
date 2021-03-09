@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroInstance {
 
 
-    public static  String BASE_URL = "http://staging.php-dev.in:8844/trainingapp/api/users/";
+    public static  String BASE_URL = "http://staging.php-dev.in:8844/trainingapp/api/";
 
     private static Retrofit retrofit;
 
@@ -15,12 +15,10 @@ public class RetroInstance {
         if(retrofit == null){
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://staging.php-dev.in:8844/trainingapp/api/users/")
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
         }
-
         return retrofit;
     }
 }

@@ -22,7 +22,6 @@
         app:itemTextColor="@color/white"
         app:menu="@menu/main_menu">
 
-
     </com.google.android.material.navigation.NavigationView>
 
     <ScrollView
@@ -44,11 +43,29 @@
                     layout="@layout/toolbar" />
             </ScrollView>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="250dp">
+
+            </androidx.viewpager.widget.ViewPager>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/indicator_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+               android:layout_alignParentBottom="true"
+                />
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
