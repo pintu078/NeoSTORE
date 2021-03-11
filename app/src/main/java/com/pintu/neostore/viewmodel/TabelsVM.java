@@ -2,12 +2,14 @@ package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
+import com.pintu.neostore.drawer.Tables;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.network.APIService;
@@ -15,6 +17,7 @@ import com.pintu.neostore.network.RetroInstance;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +28,7 @@ public class TabelsVM extends ViewModel {
 
     private Context context;
     private MutableLiveData<List<ProductList_Data>> productlist;
+    String Page = "";
 
     public TabelsVM(Context context){
 
@@ -37,21 +41,21 @@ public class TabelsVM extends ViewModel {
 
     }
 
-
     public MutableLiveData<List<ProductList_Data>> getTableListObserver() {
 
         if(productlist == null){
             productlist = new MutableLiveData<List<ProductList_Data>>();
+            loadProductLists("1",10,1);
 
-            loadProductLists();
+          //  loadProductLists();
         }
         return productlist;
     }
 
-    private void loadProductLists(){
+    public void loadProductLists(String id, final Integer li, final Integer page){
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
 
-        Call<ProductList_APIMsg> call = apiService.getProductList("1","10","1");
+        Call<ProductList_APIMsg> call = apiService.getProductList(id,li,page);
         System.out.println("--------------------------TABELSvm-------------");
         call.enqueue(new Callback<ProductList_APIMsg>() {
             @Override
@@ -59,12 +63,14 @@ public class TabelsVM extends ViewModel {
                 System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if(response.isSuccessful()){
 
+
                     Log.w("pintu",new Gson().toJson(response.body()));
                     List<ProductList_Data> list = response.body().getData();
-                    String content = list.get(2).getName();
-                    System.out.println("---------content-----------------");
-                    System.out.println(content);
 
+        //            String content = list.get(2).getName();
+                    System.out.println("---------content-----------------");
+  //                  System.out.println(content);
+                    Log.d("saurabh", "is Successful");
                     productlist.setValue(list);
                     System.out.println(productlist.getClass());
                     System.out.println(list.size());
@@ -82,6 +88,7 @@ public class TabelsVM extends ViewModel {
 //                                context,
 //                                jObjError.getString("user_msg"),
 //                                Toast.LENGTH_SHORT).show();
+                        Tables.progressBar.setVisibility(View.GONE);
                     } catch (Exception e) {
 
                  //      Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();

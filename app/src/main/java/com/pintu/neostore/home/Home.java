@@ -1,15 +1,12 @@
 package com.pintu.neostore.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,31 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ViewPagerAdapter;
-import com.pintu.neostore.drawer.MyAccount;
+import com.pintu.neostore.drawer.MyAccount.MyAccount;
 import com.pintu.neostore.drawer.MyCart;
 import com.pintu.neostore.drawer.Tables;
 import com.pintu.neostore.login.Login;
-import com.pintu.neostore.model.APIMsg;
-import com.pintu.neostore.register.AppConstant;
-import com.pintu.neostore.register.MyData;
 
-import java.util.List;
+
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-import okhttp3.Response;
+
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,6 +41,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     ViewPager mViewPager;
     TabLayout indicator;
     Intent intent;
+    SharedPreferences sp ;
+    SharedPreferences.Editor editor ;
     // images array
     int[] images = {R.drawable.beds,R.drawable.sofas,R.drawable.cupboards,R.drawable.tabels,R.drawable.chairs};
 
@@ -99,7 +90,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 //        per.setText(myData.FnameD+" "+myData.LnameD);
 //        ema.setText(myData.EmailD);
 
-        SharedPreferences sp = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
         per.setText(sp.getString("FName","")+" "+sp.getString("LName",""));
         ema.setText(sp.getString("Email",""));
 
@@ -143,8 +134,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(intent);
                 break;
             case R.id.nav_logout:
-                SharedPreferences sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
+                sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
+                editor = sp.edit();
+                editor.putString("FName","");
                // editor.remove("hasLoggedIn");
                 editor.clear();
                 editor.commit();

@@ -1,7 +1,8 @@
-package com.pintu.neostore.drawer;
+package com.pintu.neostore.drawer.MyAccount;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.register.Register;
+import com.pintu.neostore.login.Login;
 
 public class MyAccount extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class MyAccount extends AppCompatActivity {
         EditProfile = (Button)findViewById(R.id.btn_edit_profile);
         ResetProfile = (Button)findViewById(R.id.btn_reset_passwrd);
 
-        SharedPreferences sp = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
         FirstName.setText(sp.getString("FName",""));
         LastName.setText(sp.getString("LName",""));
         Email.setText(sp.getString("Email",""));
@@ -45,5 +46,20 @@ public class MyAccount extends AppCompatActivity {
             }
         });
 
+        EditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccount.this, com.pintu.neostore.drawer.MyAccount.EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        ResetProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyAccount.this, com.pintu.neostore.drawer.MyAccount.ResetPass.class);
+                startActivity(intent);
+            }
+        });
     }
 }

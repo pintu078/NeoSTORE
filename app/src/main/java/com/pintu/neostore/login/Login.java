@@ -72,6 +72,8 @@ public class Login extends AppCompatActivity {
                     String E = apiMsg.getData().getEmail();
                     String G = apiMsg.getData().getGender();
                     String P = apiMsg.getData().getPhoneNo();
+                    String a = apiMsg.getData().getAccessToken();
+
 
                     SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -81,8 +83,12 @@ public class Login extends AppCompatActivity {
                     myEdit.putString("Email", E);
                     myEdit.putString("Gender", G);
                     myEdit.putString("Phone", P);
-                    myEdit.putBoolean("hasLoggedIn",true);
+                    myEdit.putString("Token" ,a);
+
+
+                  //  myEdit.putBoolean("hasLoggedIn",true);
                     myEdit.commit();
+                    System.out.println("---------"+F+L+U+E);
 
                     Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
                     startActivity(intent);

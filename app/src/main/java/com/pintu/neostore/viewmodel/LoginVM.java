@@ -65,18 +65,20 @@ public class LoginVM extends ViewModel {
                 if(response.isSuccessful()){
 
                    loginList.postValue(response.body());
-//                    APIMsg postResponse = response.body();
-//                    String content = "";
-//                    content += "Code: " + response.code()+ "\n";
-//                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
-//                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
-//                    content += "Last Name: " + postResponse.getData().getFirstName() + "\n";
+                    APIMsg postResponse = response.body();
+                    String content = "";
+                    content += "Code: " + response.code()+ "\n";
+                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+                    content += "First Name: " + postResponse.getData().getEmail() + "\n";
+                    content += "Last Name: " + postResponse.getData().getFirstName() + "\n";
 //                    String F =  postResponse.getData().getFirstName();
 //                    String L =  postResponse.getData().getLastName();
 //                    String E =  postResponse.getData().getEmail();
 //                    String G =  postResponse.getData().getGender();
 //                    String Ph =  postResponse.getData().getPhoneNo();
 //                    AppConstant.mydatas.add(0,new MyData(F,L,E,G,Ph));
+
+                    System.out.println(content);
 
                  
                     System.out.println("--------------------------------------------SUccess------------------------------------------------------");

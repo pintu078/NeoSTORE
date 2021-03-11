@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,40 +37,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
                 android:gravity="center"
-                android:text="My Account"
+                android:text="Reset Password"
                 android:textColor="@color/white"
                 android:textSize="30sp">
 
             </TextView>
         </androidx.appcompat.widget.Toolbar>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/header_img"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:src="@drawable/ic_vector_assest_person"
+        <TextView
+            android:id="@+id/tv_neoStore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="21dp">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
+            android:text="NeoSTORE"
+            android:textColor="@color/textColor"
+            android:textSize="51sp"
+            android:textStyle="bold"
+           />
 
 
         <EditText
-            android:id="@+id/ed_first_name"
+            android:id="@+id/ed_curr_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="38dp"
             android:layout_marginRight="38dp"
+            android:layout_marginTop="56dp"
             android:background="@drawable/stroke_box"
             android:drawableLeft="@drawable/ic_vector_assest_person"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:enabled="false"
-            android:hint="First Name"
+            android:hint="Current Password"
             android:inputType="text"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
@@ -82,7 +80,7 @@
             />
 
         <EditText
-            android:id="@+id/ed_last_name"
+            android:id="@+id/ed_new_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -94,8 +92,7 @@
             android:drawableLeft="@drawable/ic_vector_assest_person"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:enabled="false"
-            android:hint="Last Name"
+            android:hint="New Password"
             android:inputType="text"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -105,7 +102,7 @@
             />
 
         <EditText
-            android:id="@+id/ed_email"
+            android:id="@+id/ed_con_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -117,57 +114,8 @@
             android:drawableLeft="@drawable/ic_vector_assest_email"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:enabled="false"
-            android:hint="Email"
+            android:hint="Confirm Password"
             android:inputType="text"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="18sp"
-             />
-
-        <EditText
-            android:id="@+id/ed_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="38dp"
-            android:background="@drawable/stroke_box"
-            android:drawableLeft="@drawable/ic_vector_assest_phone"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:enabled="false"
-            android:hint="Phone Number"
-            android:inputType="number"
-            android:maxLength="10"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="18sp"
-            />
-
-        <EditText
-            android:id="@+id/ed_dob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="38dp"
-            android:background="@drawable/stroke_box"
-            android:drawableLeft="@drawable/ic_vector_assest_cake"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:enabled="false"
-            android:hint="D.O.B"
-            android:inputType="number"
-            android:maxLength="10"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@color/textColor"
@@ -176,7 +124,7 @@
             />
 
         <Button
-            android:id="@+id/btn_edit_profile"
+            android:id="@+id/btn_reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="38dp"
@@ -185,24 +133,11 @@
             android:background="@drawable/rounded_button"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
-            android:text="Edit Profile"
+            android:text="Reset Password"
             android:textColor="#E91C1A"
             android:textSize="26sp"
             android:textStyle="bold"
-             />
-    </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_reset_passwrd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:layout_alignParentBottom="true"
-            android:text="Reset Password"
-            android:textColor="@color/gray"
-            android:textSize="26sp"
             />
-    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
 

@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Name =(TextView)findViewById(R.id.name);
 
         SharedPreferences sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
-        boolean hasLoggedIn = sp.getBoolean("hasLoggedIn", false);
+//        boolean hasLoggedIn = sp.getBoolean("hasLoggedIn", false);
+        String Name = sp.getString("FName","");
 
-        if(!hasLoggedIn) {
+        if(Name.equals("")) {
             Log.d("saurabh","if");
             new Handler().postDelayed(new Runnable() {
                 @Override
