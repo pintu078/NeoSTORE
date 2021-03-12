@@ -73,7 +73,8 @@ public class Login extends AppCompatActivity {
                     String G = apiMsg.getData().getGender();
                     String P = apiMsg.getData().getPhoneNo();
                     String a = apiMsg.getData().getAccessToken();
-
+                    String dob = String.valueOf(apiMsg.getData().getDob());
+                    String profile = String.valueOf(apiMsg.getData().getProfilePic());
 
                     SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -84,6 +85,8 @@ public class Login extends AppCompatActivity {
                     myEdit.putString("Gender", G);
                     myEdit.putString("Phone", P);
                     myEdit.putString("Token" ,a);
+                    myEdit.putString("DOB", dob);
+                    myEdit.putString("Profile",profile);
 
 
                   //  myEdit.putBoolean("hasLoggedIn",true);

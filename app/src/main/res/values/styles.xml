@@ -10,6 +10,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">0dp</item>
     </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/titleBar</item>
+    </style>
 
 
 </resources>

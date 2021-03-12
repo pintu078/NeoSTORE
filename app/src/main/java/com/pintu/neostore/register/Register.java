@@ -58,9 +58,6 @@ public class Register extends AppCompatActivity {
          });
 
 
-
-
-
         FirstName = (EditText)findViewById(R.id.ed_first_name);
         LastName = (EditText)findViewById(R.id.ed_last_name);
         Email = (EditText)findViewById(R.id.ed_email);

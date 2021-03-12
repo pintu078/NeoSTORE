@@ -51,10 +51,10 @@ public class EditProfileVM extends ViewModel {
         return editlist;
     }
 
-    public void loadEditLists(String t,String F, String L, String E,String d,String P,String Ph) {
+    public void loadEditLists(String token,String FName, String LName, String Email,String dob,String Pic,String Phone) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-
-        Call<APIMsg> call = apiService.editPost(t.trim(),F,L,E,d,P,Ph);
+        System.out.println("load     "+token+" "+FName+" "+LName+" "+Email+" "+dob+" "+Pic+" "+Phone);
+        Call<APIMsg> call = apiService.editPost(token,FName,LName,Email,dob,Pic,Phone);
         System.out.println("--------------------------TABELSvm-------------");
         call.enqueue(new Callback<APIMsg>() {
             @Override
@@ -68,13 +68,14 @@ public class EditProfileVM extends ViewModel {
 
                 } else {
                     System.out.println(" response  code   " +response.code());
+                    System.out.println(" response  code   " +response.message());
                     Log.d("Saurabh", response.errorBody().toString());
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         System.out.println("-----DM----------------------------------------");
                         Toast.makeText(
                                 context,
-                                jObjError.getString("user_msg"),
+                                jObjError.getString("message"),
                                 Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -82,7 +83,6 @@ public class EditProfileVM extends ViewModel {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<APIMsg> call, Throwable t) {
 
@@ -92,10 +92,7 @@ public class EditProfileVM extends ViewModel {
                 System.out.println("------------ff------UnSucessful------------------");
             }
         });
-
     }
-
-
 }
 
 

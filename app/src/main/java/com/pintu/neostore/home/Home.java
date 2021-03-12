@@ -3,6 +3,7 @@ package com.pintu.neostore.home;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import com.pintu.neostore.drawer.MyAccount.MyAccount;
 import com.pintu.neostore.drawer.MyCart;
 import com.pintu.neostore.drawer.Tables;
 import com.pintu.neostore.login.Login;
-
+import com.squareup.picasso.Picasso;
 
 
 import java.util.Timer;
@@ -61,7 +62,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         View headerContainer = navigationView.getHeaderView(0);
         toolbar = findViewById(R.id.toolbar);
         indicator=(TabLayout)findViewById(R.id.indicator);
-        ImageView img = (ImageView) headerContainer.findViewById(R.id.header_img);
+        ImageView headerImg = (ImageView) headerContainer.findViewById(R.id.header_img);
         TextView per = (TextView) headerContainer.findViewById(R.id.header_name);
         TextView ema = (TextView) headerContainer.findViewById(R.id.header_email);
 
@@ -93,6 +94,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
         per.setText(sp.getString("FName","")+" "+sp.getString("LName",""));
         ema.setText(sp.getString("Email",""));
+        String image = sp.getString("Profile","");
+        Picasso.with(getApplicationContext())
+                .load(image)
+                .fit()
+                .into(headerImg);
+
 
 
 
@@ -167,3 +174,4 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 }
+

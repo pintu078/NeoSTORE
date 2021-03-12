@@ -29,6 +29,8 @@ public class ResetPass extends AppCompatActivity {
     ImageButton imgbtn;
     String Currents, News, Confirms,token;
     ResetVM resetVM;
+    SharedPreferences sp;
+    SharedPreferences.Editor editor ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class ResetPass extends AppCompatActivity {
         imgbtn = (ImageButton) findViewById(R.id.imgbtn);
 
 
-        SharedPreferences sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
+        sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
         token = sp.getString("Token","");
         Log.d("saurabh",token+"  reset");
 
@@ -60,6 +62,15 @@ public class ResetPass extends AppCompatActivity {
                 Log.d("saurabh", "OnChanged");
                 if (apiMsg != null) {
                     Log.d("saurabh", "Success");
+                    sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
+                    editor = sp.edit();
+                    editor.putString("FName","");
+                    // editor.remove("hasLoggedIn");
+                    editor.clear();
+                    editor.commit();
+                    Intent intent = new Intent(ResetPass.this, Login.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
