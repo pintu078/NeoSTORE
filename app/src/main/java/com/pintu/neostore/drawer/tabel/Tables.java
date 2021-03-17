@@ -1,35 +1,27 @@
-package com.pintu.neostore.drawer;
+package com.pintu.neostore.drawer.tabel;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ProductListAdapter;
-import com.pintu.neostore.model.APIMsg;
-import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
-import com.pintu.neostore.register.Register;
 import com.pintu.neostore.viewmodel.TabelsVM;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Tables extends AppCompatActivity {
 
@@ -139,6 +131,9 @@ public class Tables extends AppCompatActivity {
                 }
             }
         });
+
+
+
 
 
     }

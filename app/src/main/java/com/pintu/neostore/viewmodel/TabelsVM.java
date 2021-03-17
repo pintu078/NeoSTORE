@@ -3,13 +3,12 @@ package com.pintu.neostore.viewmodel;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
-import com.pintu.neostore.drawer.Tables;
+import com.pintu.neostore.drawer.tabel.Tables;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.network.APIService;
@@ -17,7 +16,6 @@ import com.pintu.neostore.network.RetroInstance;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

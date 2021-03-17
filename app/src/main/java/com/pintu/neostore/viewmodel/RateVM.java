@@ -1,6 +1,5 @@
 package com.pintu.neostore.viewmodel;
 
-
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,7 +7,8 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.model.APIMsg;
+import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
+import com.pintu.neostore.model.Rate_Model.Rate_APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
 
@@ -18,14 +18,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class EditProfileVM extends ViewModel {
+public class RateVM extends ViewModel {
 
     private Context context;
-    private MutableLiveData<APIMsg> editlist;
+    private MutableLiveData<Rate_APIMsg> rate_list;
 
 
-    public EditProfileVM(Context context) {
+    public RateVM(Context context) {
 
         this.context = context;
         //   this.loginModel=loginModel;
@@ -34,29 +33,30 @@ public class EditProfileVM extends ViewModel {
 
 
 
-    public MutableLiveData<APIMsg> getEditListObserver() {
+    public MutableLiveData<Rate_APIMsg> getRatingObserver() {
 
-        if (editlist == null) {
-            editlist = new MutableLiveData<>();
+        if (rate_list == null) {
+            rate_list = new MutableLiveData<>();
             //  loadProductLists();
         }
-        return editlist;
+        return rate_list;
     }
 
-    public void loadEditLists(String token,String FName, String LName, String Email,String dob,String Pic,String Phone) {
+    public void loadRating(String product_Id,String rating) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        System.out.println("load     "+token+" "+FName+" "+LName+" "+Email+" "+dob+" "+Pic+" "+Phone);
-        Call<APIMsg> call = apiService.editPost(token,FName,LName,Email,dob,Pic,Phone);
+        System.out.println();
+        Call<Rate_APIMsg> call = apiService.ratePost(product_Id,rating);
         System.out.println("--------------------------TABELSvm-------------");
-        call.enqueue(new Callback<APIMsg>() {
+        call.enqueue(new Callback<Rate_APIMsg>() {
             @Override
-            public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
+            public void onResponse(Call<Rate_APIMsg> call, Response<Rate_APIMsg> response) {
                 System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if (response.isSuccessful()) {
                     response.code();
-                   editlist.postValue(response.body());
+                    rate_list.postValue(response.body());
 
-                   Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     System.out.println(" response  code   " +response.code());
@@ -67,16 +67,16 @@ public class EditProfileVM extends ViewModel {
                         System.out.println("-----DM----------------------------------------");
                         Toast.makeText(
                                 context,
-                                jObjError.getString("message"),
+                                jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
-                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
             @Override
-            public void onFailure(Call<APIMsg> call, Throwable t) {
+            public void onFailure(Call<Rate_APIMsg> call, Throwable t) {
 
                 Toast.makeText(context,"Check Internet Connection",Toast.LENGTH_SHORT).show();
                 System.out.println("-------------------------------------------------------");
@@ -86,6 +86,5 @@ public class EditProfileVM extends ViewModel {
         });
     }
 }
-
 
 

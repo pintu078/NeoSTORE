@@ -3,10 +3,9 @@
     package="com.pintu.neostore">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-
 
     <application
         android:allowBackup="true"
@@ -16,11 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drawer.MyAccount.ResetPass"></activity>
+        <activity android:name=".drawer.tabel.ProductDetailed" />
+        <activity android:name=".drawer.MyAccount.ResetPass" />
         <activity android:name=".drawer.MyAccount.EditProfile" />
-        <activity android:name=".drawer.Tables" />
+        <activity android:name=".drawer.tabel.Tables" />
         <activity android:name=".drawer.MyAccount.MyAccount" />
-        <activity android:name=".drawer.MyCart" />
+        <activity android:name=".drawer.mycart.MyCart" />
         <activity android:name=".home.Home" />
         <activity android:name=".register.Register" />
         <activity android:name=".forgot.Forgot" />

@@ -1,8 +1,12 @@
 package com.pintu.neostore.network;
 
 import com.pintu.neostore.model.APIMsg;
+import com.pintu.neostore.model.Cart.addCart_APIMsg;
+import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
+import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
+import com.pintu.neostore.model.Rate_Model.Rate_APIMsg;
 
 import java.util.List;
 
@@ -17,10 +21,6 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    @GET("products/getList")
-    Call<ProductList_APIMsg> getProductList(@Query("product_category_id") String product_category_id,
-                                            @Query("limit") Integer limit,
-                                            @Query("page") Integer page);
 
 
     @FormUrlEncoded
@@ -59,6 +59,33 @@ public interface APIService {
                           @Field("old_password") String old_password,
                           @Field("password") String password,
                           @Field("confirm_password") String confirm_password);
+
+
+    @GET("products/getList")
+    Call<ProductList_APIMsg> getProductList(@Query("product_category_id") String product_category_id,
+                                            @Query("limit") Integer limit,
+                                            @Query("page") Integer page);
+
+    @GET("products/getDetail")
+    Call<ProductDetailed_APIMsg> getProductDetail(@Query(" product_id") String  product_id);
+
+    @FormUrlEncoded
+    @POST("products/setRating")
+    Call<Rate_APIMsg> ratePost(@Field("product_id") String product_id,
+                                @Field("rating") String rating);
+
+    @FormUrlEncoded
+    @POST("addToCart")
+    Call<addCart_APIMsg> buyPost(@Header("access_token") String access_token,
+                                 @Field("product_id") String product_id,
+                                 @Field("quantity") String quantity);
+
+    @GET("cart")
+    Call<ListCartItem_APIMsg> myCartPost(@Header("access_token") String access_token);
+
+
+
+
 
 
 }

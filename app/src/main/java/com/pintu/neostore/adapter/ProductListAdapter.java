@@ -1,6 +1,8 @@
 package com.pintu.neostore.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
+import com.pintu.neostore.drawer.tabel.ProductDetailed;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
 import com.squareup.picasso.Picasso;
@@ -20,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> {
+
 
     List<ProductList_Data> al;
     Context context;
@@ -70,6 +74,23 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             txt2 = (TextView) itemView.findViewById(R.id.desctextview);
             txt3 = (TextView) itemView.findViewById(R.id.pricetxtview);
             ratingBar = (RatingBar)itemView.findViewById(R.id.ratingbar);
+
+            context = itemView.getContext();
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int itemPosition = getLayoutPosition();
+                    Toast.makeText(context, "" + itemPosition, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,ProductDetailed.class);
+//                    intent.putExtra("name",""+android.get(itemPosition).getOffer());
+                   intent.putExtra("product id",""+al.get(itemPosition).getId());
+                   intent.putExtra("image",""+al.get(itemPosition).getProductImages());
+                   Log.d("saurabh","item  position"+itemPosition);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

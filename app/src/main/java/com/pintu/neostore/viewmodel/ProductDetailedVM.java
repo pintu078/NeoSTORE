@@ -1,6 +1,5 @@
 package com.pintu.neostore.viewmodel;
 
-
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.pintu.neostore.model.APIMsg;
+import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
 
@@ -18,14 +18,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class EditProfileVM extends ViewModel {
+public class ProductDetailedVM extends ViewModel {
 
     private Context context;
-    private MutableLiveData<APIMsg> editlist;
+    private MutableLiveData<ProductDetailed_APIMsg> prod_details_list;
 
 
-    public EditProfileVM(Context context) {
+    public ProductDetailedVM(Context context) {
 
         this.context = context;
         //   this.loginModel=loginModel;
@@ -34,29 +33,30 @@ public class EditProfileVM extends ViewModel {
 
 
 
-    public MutableLiveData<APIMsg> getEditListObserver() {
+    public MutableLiveData<ProductDetailed_APIMsg> getProdDetailsObserver() {
 
-        if (editlist == null) {
-            editlist = new MutableLiveData<>();
+        if (prod_details_list == null) {
+            prod_details_list = new MutableLiveData<>();
             //  loadProductLists();
         }
-        return editlist;
+        return prod_details_list;
     }
 
-    public void loadEditLists(String token,String FName, String LName, String Email,String dob,String Pic,String Phone) {
+    public void loadProductDetailed(String product_Id) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        System.out.println("load     "+token+" "+FName+" "+LName+" "+Email+" "+dob+" "+Pic+" "+Phone);
-        Call<APIMsg> call = apiService.editPost(token,FName,LName,Email,dob,Pic,Phone);
+        System.out.println();
+        Call<ProductDetailed_APIMsg> call = apiService.getProductDetail(product_Id);
         System.out.println("--------------------------TABELSvm-------------");
-        call.enqueue(new Callback<APIMsg>() {
+        call.enqueue(new Callback<ProductDetailed_APIMsg>() {
             @Override
-            public void onResponse(Call<APIMsg> call, Response<APIMsg> response) {
+            public void onResponse(Call<ProductDetailed_APIMsg> call, Response<ProductDetailed_APIMsg> response) {
                 System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if (response.isSuccessful()) {
                     response.code();
-                   editlist.postValue(response.body());
+                    prod_details_list.postValue(response.body());
+                    Log.d("saurabh","response "+response.body().getData().getProductImages().get(0).getImage());
 
-                   Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(context, response.body().getStatus(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     System.out.println(" response  code   " +response.code());
@@ -71,12 +71,12 @@ public class EditProfileVM extends ViewModel {
                                 Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
-                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
             @Override
-            public void onFailure(Call<APIMsg> call, Throwable t) {
+            public void onFailure(Call<ProductDetailed_APIMsg> call, Throwable t) {
 
                 Toast.makeText(context,"Check Internet Connection",Toast.LENGTH_SHORT).show();
                 System.out.println("-------------------------------------------------------");
@@ -86,6 +86,4 @@ public class EditProfileVM extends ViewModel {
         });
     }
 }
-
-
 
