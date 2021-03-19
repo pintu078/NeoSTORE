@@ -1,6 +1,5 @@
 package com.pintu.neostore.drawer.tabel;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,7 +13,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +25,7 @@ import android.widget.TextView;
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ProductDetailedAdapter;
 import com.pintu.neostore.login.Login;
-import com.pintu.neostore.model.Cart.addCart_APIMsg;
+import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_Data;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductImage;
@@ -169,13 +167,14 @@ public class ProductDetailed extends AppCompatActivity {
         });
 
         buyVM = new ViewModelProvider(this, new BuyVMFactory(this)).get(BuyVM.class);
-        buyVM.getBuyObserver().observe(this, new Observer<addCart_APIMsg>() {
+        buyVM.getBuyObserver().observe(this, new Observer<Cart_APIMSg>() {
             @Override
-            public void onChanged(addCart_APIMsg addCart_apiMsg) {
-                if(addCart_apiMsg != null){
+            public void onChanged(Cart_APIMSg cart_apiMsg) {
+                if(cart_apiMsg != null){
                     Log.d("saurabh","Success Buying");
                 }
             }
+
         });
 
 

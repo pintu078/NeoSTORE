@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.adapter.MyCartAdapter;
 import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
@@ -17,43 +18,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BuyVM extends ViewModel {
+public class EditCartVM extends ViewModel {
 
     private Context context;
-    private MutableLiveData<Cart_APIMSg> buy_list;
+    private MutableLiveData<Cart_APIMSg> cart_list;
 
-
-    public BuyVM(Context context) {
-
+    public EditCartVM(Context context) {
         this.context = context;
-        //   this.loginModel=loginModel;
-        //     loginList = new MutableLiveData<>();
     }
 
-
-    public MutableLiveData<Cart_APIMSg> getBuyObserver() {
-
-        if (buy_list == null) {
-            buy_list = new MutableLiveData<>();
-            //  loadProductLists();
+    public MutableLiveData<Cart_APIMSg> getEditCartObserver() {
+        if (cart_list == null) {
+            cart_list = new MutableLiveData<>();
         }
-        return buy_list;
+        return cart_list;
     }
 
-    public void loadBuy(String header, String product_Id, String quantity) {
+    public void loadEdit(String token, String id, String quantity) {
+        Log.d("saurabh ","loadEdit "+id+" "+quantity);
+
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        System.out.println();
-        Call<Cart_APIMSg> call = apiService.buyPost(header, product_Id, quantity);
-        System.out.println("--------------------------TABELSvm-------------");
+        Call<Cart_APIMSg> call = apiService.editCartPost(token, id, quantity);
         call.enqueue(new Callback<Cart_APIMSg>() {
             @Override
             public void onResponse(Call<Cart_APIMSg> call, Response<Cart_APIMSg> response) {
-                System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if (response.isSuccessful()) {
-                    response.code();
-                    buy_list.postValue(response.body());
-
-
+                    cart_list.postValue(response.body());
                     Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -76,11 +66,11 @@ public class BuyVM extends ViewModel {
 
             @Override
             public void onFailure(Call<Cart_APIMSg> call, Throwable t) {
-
                 Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
-                System.out.println("------------ff------UnSucessful------------------");
+                System.out.println("------------ff---dd---UnSucessful------------------");
+
             }
         });
     }

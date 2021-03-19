@@ -132,10 +132,6 @@ public class Tables extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
 }

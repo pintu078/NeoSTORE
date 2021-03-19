@@ -1,21 +1,17 @@
 package com.pintu.neostore.network;
 
 import com.pintu.neostore.model.APIMsg;
-import com.pintu.neostore.model.Cart.addCart_APIMsg;
+import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.model.ProductList_APIMsg;
-import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.model.Rate_Model.Rate_APIMsg;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -76,16 +72,22 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("addToCart")
-    Call<addCart_APIMsg> buyPost(@Header("access_token") String access_token,
-                                 @Field("product_id") String product_id,
-                                 @Field("quantity") String quantity);
+    Call<Cart_APIMSg> buyPost(@Header("access_token") String access_token,
+                              @Field("product_id") String product_id,
+                              @Field("quantity") String quantity);
 
     @GET("cart")
     Call<ListCartItem_APIMsg> myCartPost(@Header("access_token") String access_token);
 
+    @FormUrlEncoded
+    @POST("deleteCart")
+    Call<Cart_APIMSg> deleteCartPost(@Header("access_token") String access_token,
+                                     @Field("product_id") String product_id);
 
-
-
-
+    @FormUrlEncoded
+    @POST("editCart")
+    Call<Cart_APIMSg> editCartPost(@Header("access_token") String access_token,
+                              @Field("product_id") String product_id,
+                              @Field("quantity") String quantity);
 
 }

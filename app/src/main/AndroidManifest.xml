@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".drawer.mycart.empty_cart"></activity>
         <activity android:name=".drawer.tabel.ProductDetailed" />
         <activity android:name=".drawer.MyAccount.ResetPass" />
         <activity android:name=".drawer.MyAccount.EditProfile" />

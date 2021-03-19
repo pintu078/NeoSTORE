@@ -3,7 +3,7 @@ package com.pintu.neostore.model.Cart;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class addCart_APIMsg {
+public class Cart_APIMSg {
 
     @SerializedName("status")
     @Expose
@@ -25,7 +25,7 @@ public class addCart_APIMsg {
      * No args constructor for use in serialization
      *
      */
-    public addCart_APIMsg() {
+    public Cart_APIMSg() {
     }
 
     /**
@@ -36,7 +36,7 @@ public class addCart_APIMsg {
      * @param totalCarts
      * @param status
      */
-    public addCart_APIMsg(Integer status, Boolean data, Integer totalCarts, String message, String userMsg) {
+    public Cart_APIMSg(Integer status, Boolean data, Integer totalCarts, String message, String userMsg) {
         super();
         this.status = status;
         this.data = data;

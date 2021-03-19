@@ -17,13 +17,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BuyVM extends ViewModel {
+public class DeleteCartVM extends ViewModel {
 
     private Context context;
-    private MutableLiveData<Cart_APIMSg> buy_list;
+    private MutableLiveData<Cart_APIMSg> delete_list;
 
 
-    public BuyVM(Context context) {
+    public DeleteCartVM(Context context) {
 
         this.context = context;
         //   this.loginModel=loginModel;
@@ -31,19 +31,19 @@ public class BuyVM extends ViewModel {
     }
 
 
-    public MutableLiveData<Cart_APIMSg> getBuyObserver() {
+    public MutableLiveData<Cart_APIMSg> getDeleteCartObserver() {
 
-        if (buy_list == null) {
-            buy_list = new MutableLiveData<>();
+        if (delete_list == null) {
+            delete_list = new MutableLiveData<>();
             //  loadProductLists();
         }
-        return buy_list;
+        return delete_list;
     }
 
-    public void loadBuy(String header, String product_Id, String quantity) {
+    public void     loadDeleteCart(String header, String id) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
         System.out.println();
-        Call<Cart_APIMSg> call = apiService.buyPost(header, product_Id, quantity);
+        Call<Cart_APIMSg> call = apiService.deleteCartPost(header, id);
         System.out.println("--------------------------TABELSvm-------------");
         call.enqueue(new Callback<Cart_APIMSg>() {
             @Override
@@ -51,7 +51,7 @@ public class BuyVM extends ViewModel {
                 System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if (response.isSuccessful()) {
                     response.code();
-                    buy_list.postValue(response.body());
+                    delete_list.postValue(response.body());
 
 
                     Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
@@ -80,8 +80,9 @@ public class BuyVM extends ViewModel {
                 Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
-                System.out.println("------------ff------UnSucessful------------------");
+                System.out.println("------------ff---dd---UnSucessful------------------");
             }
         });
     }
 }
+

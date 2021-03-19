@@ -82,7 +82,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 public void onClick(View view) {
 
                     int itemPosition = getLayoutPosition();
-                    Toast.makeText(context, "" + itemPosition, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "" + itemPosition, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context,ProductDetailed.class);
 //                    intent.putExtra("name",""+android.get(itemPosition).getOffer());
                    intent.putExtra("product id",""+al.get(itemPosition).getId());
