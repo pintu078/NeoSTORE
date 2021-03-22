@@ -6,6 +6,9 @@ import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.Rate_Model.Rate_APIMsg;
+import com.pintu.neostore.model.order.OrderAPIMsg;
+import com.pintu.neostore.model.order.Order_List.order_list_APIMsg;
+import com.pintu.neostore.model.order.order_details.OrderDetailsAPIMsg;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -89,5 +92,19 @@ public interface APIService {
     Call<Cart_APIMSg> editCartPost(@Header("access_token") String access_token,
                               @Field("product_id") String product_id,
                               @Field("quantity") String quantity);
+
+    @FormUrlEncoded
+    @POST("order")
+    Call<OrderAPIMsg> addressPost(@Header("access_token") String access_token,
+                                 @Field("address") String address);
+
+    @GET("orderList")
+    Call<order_list_APIMsg> orderListPost(@Header("access_token") String access_token);
+
+
+    @GET("orderDetail")
+    Call<OrderDetailsAPIMsg> orderDetailsPost(@Header("access_token") String access_token,
+                                              @Query("order_id") String order_id);
+
 
 }

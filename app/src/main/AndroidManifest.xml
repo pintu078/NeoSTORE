@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".drawer.mycart.empty_cart"></activity>
+        <activity android:name=".drawer.order.OrderDetails"></activity>
+        <activity android:name=".drawer.order.OrderList" />
+        <activity android:name=".drawer.order.Address" />
+        <activity android:name=".drawer.mycart.empty_cart" />
         <activity android:name=".drawer.tabel.ProductDetailed" />
         <activity android:name=".drawer.MyAccount.ResetPass" />
         <activity android:name=".drawer.MyAccount.EditProfile" />

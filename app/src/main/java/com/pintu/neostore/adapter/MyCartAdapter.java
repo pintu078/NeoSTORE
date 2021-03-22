@@ -98,6 +98,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHold
 //        holder.Delete.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
+//                String Id = al.get(position).getProductId().toString();
 //                MyCart.deleteCartVM.loadDeleteCart(token,Id);
 //               al.remove(position);
 //               notifyItemRemoved(position);
@@ -152,7 +153,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHold
                     final String Id = al.get(itemPosition).getProductId().toString();
                     Log.d("saurabh", "delete " + Id);
                     MyCart.deleteCartVM.loadDeleteCart(token, Id);
-                    al.clear();
+                 //   al.clear();
                 }
             });
 
@@ -168,7 +169,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHold
 
                     if(initialDisplay) {
                         MyCart.editCartVM.loadEdit(token, Id, quantity);
-                        al.clear();
+//                        al.clear();
                     }
 
                 }

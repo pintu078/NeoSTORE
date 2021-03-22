@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".drawer.mycart.MyCart">
+    tools:context=".drawer.order.OrderDetails">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -21,11 +21,12 @@
             android:src="@drawable/ic_back_button" />
 
         <TextView
+            android:id="@+id/tooltext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
             android:gravity="center"
-            android:text="My Cart"
+            android:text="Order ID :"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
@@ -40,31 +41,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:id="@+id/empty_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:gravity="center"
+                android:visibility="gone"
+                >
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="262dp"
                     android:layout_height="308dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_empty_cart" />
+                    android:src="@drawable/ic_empty_cart"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="NO ORDER"
                     android:layout_gravity="center"
-                    android:text="CART IS EMPTY"
                     android:textColor="@color/titleBar"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
             </LinearLayout>
 
 
@@ -72,8 +77,13 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/activity_my_cart_row" />
+                tools:listitem="@layout/activity_order_details_row" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -87,7 +97,8 @@
                     android:layout_marginLeft="30dp"
                     android:text="Total"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
 
 
                 <TextView
@@ -97,23 +108,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
-                    android:text="Rs. 180"
+                    android:text="Rs. 00"
                     android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
             </RelativeLayout>
-
-            <Button
-                android:id="@+id/btn_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="36dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/titleBar"
-                android:text="ORDER NOW"
-                android:textColor="@color/white"
-                android:textSize="27dp" />
 
         </LinearLayout>
     </ScrollView>

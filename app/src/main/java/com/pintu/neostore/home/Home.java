@@ -23,6 +23,7 @@ import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ViewPagerAdapter;
 import com.pintu.neostore.drawer.MyAccount.MyAccount;
 import com.pintu.neostore.drawer.mycart.MyCart;
+import com.pintu.neostore.drawer.order.OrderList;
 import com.pintu.neostore.drawer.tabel.Tables;
 import com.pintu.neostore.login.Login;
 import com.squareup.picasso.Picasso;
@@ -145,6 +146,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_Table:
                 intent = new Intent(Home.this, Tables.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_myOrders:
+                intent = new Intent(Home.this, OrderList.class);
                 startActivity(intent);
                 break;
             case R.id.nav_logout:

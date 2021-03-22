@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.MyCartAdapter;
+import com.pintu.neostore.drawer.order.Address;
 import com.pintu.neostore.login.Login;
 import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
@@ -36,13 +38,13 @@ public class MyCart extends AppCompatActivity {
     MyCartAdapter myCartAdapter;
     SharedPreferences sp;
 
-    MyCartVM myCartVM;
+    public static MyCartVM myCartVM;
     public static DeleteCartVM deleteCartVM;
     public static EditCartVM editCartVM;
-    TextView total,totalTxt;
+    TextView total, totalTxt;
     Button order;
     LinearLayout empty_Layout;
-    ImageButton delete,back_btn;
+    ImageButton delete, back_btn;
     Boolean flag = true;
     String token;
     List<ListCartItem_Data> list;
@@ -52,17 +54,16 @@ public class MyCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_cart);
 
-        total = (TextView)findViewById(R.id.total);
-        totalTxt = (TextView)findViewById(R.id.totaltx);
+        total = (TextView) findViewById(R.id.total);
+        totalTxt = (TextView) findViewById(R.id.totaltx);
         empty_Layout = (LinearLayout) findViewById(R.id.empty_layout);
-        back_btn = (ImageButton)findViewById(R.id.back_btn);
-        order = (Button)findViewById(R.id.btn_order);
+        back_btn = (ImageButton) findViewById(R.id.back_btn);
+        order = (Button) findViewById(R.id.btn_order);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-
 
 
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +73,21 @@ public class MyCart extends AppCompatActivity {
             }
         });
 
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyCart.this, Address.class);
+                startActivity(intent);
+            }
+        });
+
         myCartVM = new ViewModelProvider(this, new MyCartVMFactory(this)).get(MyCartVM.class);
         myCartVM.getMyCartObserver().observe(this, new Observer<ListCartItem_APIMsg>() {
             @Override
             public void onChanged(ListCartItem_APIMsg listCartItem_apiMsg) {
                 list = listCartItem_apiMsg.getData();
                 if (listCartItem_apiMsg != null) {
-                    if(list!=null) {
+                    if (list != null) {
                         empty_Layout.setVisibility(View.GONE);
                         Log.d("saurah", "MyCart Success  " + listCartItem_apiMsg.getData().get(0).getProduct().getProductImages());
 
@@ -87,8 +96,10 @@ public class MyCart extends AppCompatActivity {
 
                         total.setText("₹ " + listCartItem_apiMsg.getTotal() + "0.0");
                         Log.d("saurah", "MyCart Success  " + listCartItem_apiMsg.getTotal());
-                    }else{
-                      setVisible();
+                    } else {
+                        myCartAdapter = new MyCartAdapter(MyCart.this, list);
+                        recyclerView.setAdapter(myCartAdapter);
+                        setGone();
                     }
                 } else {
                     System.out.println("---------3-------");
@@ -102,38 +113,39 @@ public class MyCart extends AppCompatActivity {
 
             @Override
             public void onChanged(Cart_APIMSg deleteCart_apiMsg) {
-                if(deleteCart_apiMsg != null){
-                    if(deleteCart_apiMsg.getTotalCarts()!=0) {
+                if (deleteCart_apiMsg != null) {
+                    if (deleteCart_apiMsg.getTotalCarts() != 0) {
                         myCartVM.loadMyCart(token);
                         flag = false;
-                    }
-                    else{
-                        setVisible();
+                    } else {
+                        myCartVM.loadMyCart(token);
+                        setGone();
                     }
                 }
             }
         });
 
-        editCartVM = new ViewModelProvider(this,new EditCartVMFactory(this)).get(EditCartVM.class);
+        editCartVM = new ViewModelProvider(this, new EditCartVMFactory(this)).get(EditCartVM.class);
         editCartVM.getEditCartObserver().observe(this, new Observer<Cart_APIMSg>() {
             @Override
             public void onChanged(Cart_APIMSg editCart_apimSg) {
-                if(editCart_apimSg != null){
+                if (editCart_apimSg != null) {
 
-                 myCartVM.loadMyCart(token);
-                 flag = false;
+                    myCartVM.loadMyCart(token);
+                    flag = false;
 
                 }
             }
         });
 
-        sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
-        token = sp.getString("Token","");
-        if(flag == true) {
+        sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+        token = sp.getString("Token", "");
+        if (flag == true) {
             myCartVM.loadMyCart(token);
         }
     }
-    public void setVisible(){
+
+    public void setGone() {
         recyclerView.setVisibility(View.GONE);
         totalTxt.setVisibility(View.GONE);
         total.setVisibility(View.GONE);
