@@ -2,11 +2,13 @@ package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.drawer.mycart.MyCart;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
@@ -22,12 +24,8 @@ public class MyCartVM extends ViewModel {
     private Context context;
     private MutableLiveData<ListCartItem_APIMsg> mycart_list;
 
-
     public MyCartVM(Context context) {
-
         this.context = context;
-        //   this.loginModel=loginModel;
-        //     loginList = new MutableLiveData<>();
     }
 
 
@@ -35,7 +33,6 @@ public class MyCartVM extends ViewModel {
 
         if (mycart_list == null) {
             mycart_list = new MutableLiveData<>();
-            //  loadProductLists();
         }
         return mycart_list;
     }
@@ -52,14 +49,14 @@ public class MyCartVM extends ViewModel {
                 if (response.isSuccessful()) {
                     response.code();
                     mycart_list.postValue(response.body());
-
-
+                    visible();
 //                    Toast.makeText(context, response.body().getStatus(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     System.out.println(" response  code   " + response.code());
                     System.out.println(" response  code   " + response.message());
                     Log.d("Saurabh", response.errorBody().toString());
+
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         System.out.println("-----DM----------------------------------------");
@@ -67,9 +64,11 @@ public class MyCartVM extends ViewModel {
                                 context,
                                 jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
+                        visible();
                     } catch (Exception e) {
 
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        visible();
                     }
                 }
             }
@@ -81,8 +80,12 @@ public class MyCartVM extends ViewModel {
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
+                visible();
             }
         });
+    }
+    public void visible(){
+        MyCart.progressBar.setVisibility(View.GONE);
     }
 }
 

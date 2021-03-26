@@ -6,19 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.drawer.order.OrderDetails;
-import com.pintu.neostore.drawer.tabel.ProductDetailed;
-import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.model.order.Order_List.Datum;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,7 +38,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
     public void onBindViewHolder(final OrderListAdapter.MyViewHolder holder, final int position) {
         holder.id.setText(al.get(position).getId().toString());
         holder.date.setText(al.get(position).getCreated());
-        holder.price.setText("₹. "+al.get(position).getCost());
+        holder.price.setText("₹. " + al.get(position).getCost());
 
     }
 
@@ -59,8 +53,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView id,date,price;
-
+        TextView id, date, price;
 
 
         public MyViewHolder(View itemView) {
@@ -78,8 +71,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
 
                     int itemPosition = getLayoutPosition();
                     Intent intent = new Intent(context, OrderDetails.class);
-                    intent.putExtra("order id",""+al.get(itemPosition).getId().toString());
-                    Log.d("saurabh","item  position"+itemPosition);
+                    intent.putExtra("order id", "" + al.get(itemPosition).getId().toString());
+                    Log.d("saurabh", "item  position" + itemPosition);
                     context.startActivity(intent);
                 }
             });

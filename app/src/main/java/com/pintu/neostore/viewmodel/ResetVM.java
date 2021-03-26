@@ -1,11 +1,13 @@
 package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.drawer.MyAccount.ResetPass;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
@@ -18,16 +20,12 @@ import retrofit2.Response;
 
 public class ResetVM extends ViewModel {
 
-
     private Context context;
     private MutableLiveData<APIMsg> resetlist;
-
 
     public ResetVM(Context context) {
 
         this.context = context;
-        //   this.loginModel=loginModel;
-        //     loginList = new MutableLiveData<>();
     }
 
     public MutableLiveData<APIMsg> getResetListObserver() {
@@ -41,7 +39,7 @@ public class ResetVM extends ViewModel {
     public void loadResetLists(String tok, String curr, String NewP, String Con) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
 
-        Call<APIMsg> call = apiService.resetPost(tok,curr,NewP,Con);
+        Call<APIMsg> call = apiService.resetPost(tok, curr, NewP, Con);
         System.out.println("--------------------------TABELSvm-------------");
         call.enqueue(new Callback<APIMsg>() {
             @Override
@@ -52,6 +50,7 @@ public class ResetVM extends ViewModel {
                     resetlist.postValue(response.body());
 
                     Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    visible();
 
                 } else {
                     try {
@@ -61,9 +60,11 @@ public class ResetVM extends ViewModel {
                                 context,
                                 jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
+                        visible();
                     } catch (Exception e) {
 
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        visible();
                     }
                 }
             }
@@ -75,9 +76,14 @@ public class ResetVM extends ViewModel {
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
+                visible();
             }
         });
+    }
 
+    public void visible() {
+        ResetPass.reset.setVisibility(View.VISIBLE);
+        ResetPass.progressBar.setVisibility(View.GONE);
     }
 }
 

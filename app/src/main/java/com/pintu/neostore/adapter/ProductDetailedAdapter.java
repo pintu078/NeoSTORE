@@ -1,17 +1,13 @@
 package com.pintu.neostore.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.icu.text.Transliterator;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,18 +16,18 @@ import com.pintu.neostore.drawer.tabel.ProductDetailed;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductImage;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailedAdapter extends RecyclerView.Adapter<ProductDetailedAdapter.MyViewHolder> {
 
-    List<ProductImage> personImages;
+    List<ProductImage> productImages;
     Context context;
+    int selectedItem ;
 
 
-    public ProductDetailedAdapter(Context context, List<ProductImage> personImages) {
+    public ProductDetailedAdapter(Context context, List<ProductImage> productImages) {
         this.context = context;;
-        this.personImages = personImages;
+        this.productImages = productImages;
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,36 +42,50 @@ public class ProductDetailedAdapter extends RecyclerView.Adapter<ProductDetailed
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
    //     holder.image.setImageResource(Integer.parseInt(personImages.get(position).getImage()));
 
+
         Picasso.with(context)
-                .load(personImages.get(position).getImage())
+                .load(productImages.get(position).getImage())
                 .fit()
                 .into(holder.image);
 
         Picasso.with(context)
-                .load(personImages.get(0).getImage())
+                .load(productImages.get(0).getImage())
                 .fit()
                 .into(ProductDetailed.img_main);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-          //      view.setBackgroundColor(Color.WHITE);
-                holder.itemView.setBackgroundColor(Color.RED);
-                Picasso.with(context)
-                        .load(personImages.get(position).getImage())
-                        .fit()
-                        .into(ProductDetailed.img_main);
-                view.setBackgroundColor(Color.RED);
+
+                selectedItem = position;
+                Log.d("saurabh","selectedItem  "+selectedItem);
+                notifyDataSetChanged();
             }
         });
+
+        Log.d("saurabh","po  "+position);
+        if(selectedItem==position){
+            Log.d("saurabh","selectedItem-if  "+selectedItem);
+            Log.d("saurabh","po-if "+position);
+            Drawable d = context.getResources().getDrawable(R.drawable.stroke_box_red);
+            holder.itemView.setBackground(d);
+
+        }else{
+            Drawable d = context.getResources().getDrawable(R.drawable.stroke_box_black);
+            holder.itemView.setBackground(d);
+        }
+        Picasso.with(context)
+                .load(productImages.get(selectedItem).getImage())
+                .fit()
+                .into(ProductDetailed.img_main);
 
     }
 
     @Override
     public int getItemCount() {
         System.out.println("------------------------ffff-----------------------");
-      System.out.println("images size "+personImages.size());
-        return personImages.size();
+      System.out.println("images size "+productImages.size());
+        return productImages.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // init the item view's

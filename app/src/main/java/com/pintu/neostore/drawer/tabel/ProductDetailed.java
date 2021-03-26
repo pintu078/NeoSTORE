@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ import java.util.List;
 public class ProductDetailed extends AppCompatActivity {
 
     ProductDetailedVM productDetailedVM;
-    public Dialog dialog;
+    public static Dialog dialog;
 
 
     TextView heading, heading1, heading2, descriptiuon, price, tooltext;
@@ -51,6 +52,8 @@ public class ProductDetailed extends AppCompatActivity {
     RatingBar ratingBar;
     public static ImageView img_main;
     Button Buy, Rate;
+    public static Button rateButton;
+    public static ProgressBar progressBar;
 
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
@@ -75,6 +78,8 @@ public class ProductDetailed extends AppCompatActivity {
         ratingBar = (RatingBar) findViewById(R.id.ratingbar);
         price = (TextView) findViewById(R.id.pricetxtview);
         tooltext = (TextView) findViewById(R.id.tooltext);
+        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
+
 
         img_main = (ImageView) findViewById(R.id.image_main);
 
@@ -202,7 +207,7 @@ public class ProductDetailed extends AppCompatActivity {
 
         dialog.show();
 
-        Button rateButton = (Button) dialog.findViewById(R.id.btn_resetpp);
+        rateButton = (Button) dialog.findViewById(R.id.btn_resetpp);
         // if decline button is clicked, close the custom dialog
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +215,8 @@ public class ProductDetailed extends AppCompatActivity {
                 Float ratingNumber = ratingBar.getRating();
                 Log.d("saurabh", "Rating  " + ratingNumber);
                 rateVM.loadRating(ids,ratingNumber.toString());
-                dialog.dismiss();
+
+
             }
         });
     }
@@ -232,7 +238,7 @@ public class ProductDetailed extends AppCompatActivity {
         sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
         token = sp.getString("Token","");
 
-        Button rateButton = (Button) dialog.findViewById(R.id.btn_resetpp);
+        rateButton = (Button) dialog.findViewById(R.id.btn_resetpp);
         // if decline button is clicked, close the custom dialog
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override

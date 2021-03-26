@@ -3,11 +3,13 @@ package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.drawer.MyAccount.EditProfile;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
@@ -24,29 +26,24 @@ public class EditProfileVM extends ViewModel {
     private Context context;
     private MutableLiveData<APIMsg> editlist;
 
-
     public EditProfileVM(Context context) {
 
         this.context = context;
-        //   this.loginModel=loginModel;
-        //     loginList = new MutableLiveData<>();
     }
-
 
 
     public MutableLiveData<APIMsg> getEditListObserver() {
 
         if (editlist == null) {
             editlist = new MutableLiveData<>();
-            //  loadProductLists();
         }
         return editlist;
     }
 
-    public void loadEditLists(String token,String FName, String LName, String Email,String dob,String Pic,String Phone) {
+    public void loadEditLists(String token, String FName, String LName, String Email, String dob, String Pic, String Phone) {
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        System.out.println("load     "+token+" "+FName+" "+LName+" "+Email+" "+dob+" "+Pic+" "+Phone);
-        Call<APIMsg> call = apiService.editPost(token,FName,LName,Email,dob,Pic,Phone);
+        System.out.println("load     " + token + " " + FName + " " + LName + " " + Email + " " + dob + " " + Pic + " " + Phone);
+        Call<APIMsg> call = apiService.editPost(token, FName, LName, Email, dob, Pic, Phone);
         System.out.println("--------------------------TABELSvm-------------");
         call.enqueue(new Callback<APIMsg>() {
             @Override
@@ -54,13 +51,14 @@ public class EditProfileVM extends ViewModel {
                 System.out.println("---------------onResponse-----------TABELSvm-------------");
                 if (response.isSuccessful()) {
                     response.code();
-                   editlist.postValue(response.body());
+                    editlist.postValue(response.body());
 
-                   Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
+                    visible();
 
                 } else {
-                    System.out.println(" response  code   " +response.code());
-                    System.out.println(" response  code   " +response.message());
+                    System.out.println(" response  code   " + response.code());
+                    System.out.println(" response  code   " + response.message());
                     Log.d("Saurabh", response.errorBody().toString());
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
@@ -69,21 +67,29 @@ public class EditProfileVM extends ViewModel {
                                 context,
                                 jObjError.getString("message"),
                                 Toast.LENGTH_SHORT).show();
+                        visible();
                     } catch (Exception e) {
 
-                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        visible();
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<APIMsg> call, Throwable t) {
 
-                Toast.makeText(context,"Check Internet Connection",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
+                visible();
             }
         });
+    }
+    public void visible(){
+        EditProfile.Submit.setVisibility(View.VISIBLE);
+        EditProfile.progressBar.setVisibility(View.GONE);
     }
 }
 

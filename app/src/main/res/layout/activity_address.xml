@@ -49,18 +49,21 @@
                 android:layout_marginTop="29dp"
                 android:layout_marginBottom="18dp"
                 android:text="ADDRESS"
-                android:textColor="@color/Black"
+                android:textColor="@color/address_tx"
                 android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/ed_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginBottom="29dp"
+                android:background="@drawable/stroke_box"
+                android:backgroundTint="@color/white"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                android:textColor="@color/Black"
+                android:padding="10dp"
+                android:textColor="@color/address_tx"
                 android:textSize="18dp" />
 
             <TextView
@@ -68,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="18dp"
                 android:text="LANDMARK"
-                android:textColor="@color/Black"
+                android:textColor="@color/address_tx"
                 android:textSize="18dp" />
 
             <EditText
@@ -76,10 +79,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="29dp"
+                android:background="@drawable/stroke_box"
+                android:backgroundTint="@color/white"
                 android:ems="10"
+                android:hint="LANDMARK"
                 android:inputType="text"
-                android:text="LANDMARK"
-                android:textColor="@color/Black"
+                android:padding="10dp"
+                android:textColor="@color/address_tx"
                 android:textSize="18dp" />
 
             <LinearLayout
@@ -100,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:text="CITY"
-                        android:textColor="@color/Black"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <EditText
@@ -108,10 +114,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="29dp"
+                        android:background="@drawable/stroke_box"
+                        android:backgroundTint="@color/white"
                         android:ems="10"
+                        android:hint="MUMBAI"
                         android:inputType="text"
-                        android:text="LANDMARK"
-                        android:textColor="@color/Black"
+                        android:padding="10dp"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <TextView
@@ -119,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:text="ZIP CODE"
-                        android:textColor="@color/Black"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <EditText
@@ -127,10 +136,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="29dp"
+                        android:background="@drawable/stroke_box"
+                        android:backgroundTint="@color/white"
                         android:ems="10"
+                        android:hint="400063"
                         android:inputType="number"
-                        android:text="ZIP CODE"
-                        android:textColor="@color/Black"
+                        android:padding="10dp"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
                 </LinearLayout>
 
@@ -146,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:text="STATE"
-                        android:textColor="@color/Black"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <EditText
@@ -154,10 +166,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="29dp"
+                        android:background="@drawable/stroke_box"
+                        android:backgroundTint="@color/white"
                         android:ems="10"
+                        android:hint="MAHARASHTRA"
                         android:inputType="text"
-                        android:text="LANDMARK"
-                        android:textColor="@color/Black"
+                        android:padding="10dp"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <TextView
@@ -165,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="18dp"
                         android:text="COUNTRY"
-                        android:textColor="@color/Black"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                     <EditText
@@ -173,10 +188,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="29dp"
+                        android:background="@drawable/stroke_box"
+                        android:backgroundTint="@color/white"
                         android:ems="10"
-                        android:inputType="number"
-                        android:text="INDIA"
-                        android:textColor="@color/Black"
+                        android:hint="INDIA"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textColor="@color/address_tx"
                         android:textSize="18dp" />
 
                 </LinearLayout>
@@ -192,6 +210,14 @@
                 android:textColor="@color/white"
                 android:textSize="26sp" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:indeterminateTint="@color/titleBar"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

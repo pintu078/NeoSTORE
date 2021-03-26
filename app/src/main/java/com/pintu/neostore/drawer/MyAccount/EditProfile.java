@@ -20,13 +20,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.login.Login;
 import com.pintu.neostore.model.APIMsg;
+import com.pintu.neostore.model.fetch.Data;
 import com.pintu.neostore.viewmodel.EditProfileVM;
 import com.pintu.neostore.viewmodel.EditVMFactory;
+import com.pintu.neostore.viewmodel.FetchVM;
+import com.pintu.neostore.viewmodel.FetchVMFactory;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -36,12 +40,11 @@ import java.util.Calendar;
 
 public class EditProfile extends AppCompatActivity {
 
-
-    EditProfileVM editProfileVM;
     EditText FirstName, LastName, Email, Phone, DOB;
-    Button Submit;
-    ImageButton imgbtn_Back, buttonLoadImage;
+    public static Button Submit;
+    ImageButton imgbtn_Back;
     ImageView imgProfile;
+    public static ProgressBar progressBar;
     String Fnames, Lnames, Emails, Phones, DOBs;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String namePattern = "[a-zA-Z]+";
@@ -49,9 +52,11 @@ public class EditProfile extends AppCompatActivity {
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+    EditProfileVM editProfileVM;
+    FetchVM fetchVM;
     ImageView profileImg;
     Bitmap bitmap;
-    String bitprofile;
+    String bitprofile = "";
 
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -69,16 +74,7 @@ public class EditProfile extends AppCompatActivity {
         Submit = (Button) findViewById(R.id.btn_submit);
         imgbtn_Back = (ImageButton) findViewById(R.id.imgbtn_back);
         profileImg = findViewById(R.id.profile_img);
-
-       // EditText editTextFromDate = (EditText) findViewById(R.id.editTextFromDate);
-        //setDate fromDate = new setDate(DOB, this);
-//        DatePickerHelper assessmentDueDateHelper = new DatePickerHelper(EditProfile.this,
-//                DOB);
-
-
-
-
-
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         FirstName.setText(sp.getString("FName", ""));
@@ -87,12 +83,14 @@ public class EditProfile extends AppCompatActivity {
         Phone.setText(sp.getString("Phone", ""));
         DOB.setText(sp.getString("DOB", "00-00-0000"));
         token = sp.getString("Token", "");
-        String image = sp.getString("Profile","");
-        Picasso.with(getApplicationContext())
-                .load(image)
-                .fit()
-                .into(profileImg);
-        Log.d("saurabh", token + "  edit");
+        String image = sp.getString("Profile", "");
+        if (!image.equals("")) {
+            Picasso.with(getApplicationContext())
+                    .load(image)
+                    .fit()
+                    .into(profileImg);
+            Log.d("saurabh", token + "  edit");
+        }
 
         editProfileVM = new ViewModelProvider(this, new EditVMFactory(this)).get(EditProfileVM.class);
         editProfileVM.getEditListObserver().observe(this, new Observer<APIMsg>() {
@@ -101,17 +99,77 @@ public class EditProfile extends AppCompatActivity {
 
                 Log.d("saurabh", "OnChanged");
                 if (apiMsg != null) {
-                    editor = sp.edit();
-                    editor.putString("FName", "");
-                    // editor.remove("hasLoggedIn");
-                    editor.clear();
-                    editor.commit();
-                    Intent intent = new Intent(EditProfile.this, Login.class);
-                    startActivity(intent);
+                    String FName = apiMsg.getData().getFirstName();
+                    String LName = apiMsg.getData().getLastName();
+                    String UName = apiMsg.getData().getUsername();
+                    String Email = apiMsg.getData().getEmail();
+                    String Gender = apiMsg.getData().getGender();
+                    String Phone = apiMsg.getData().getPhoneNo();
+                    String Token = apiMsg.getData().getAccessToken();
+                    String dob = String.valueOf(apiMsg.getData().getDob());
+                    String profile = String.valueOf(apiMsg.getData().getProfilePic());
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.putString("FName", FName.toUpperCase());
+                    myEdit.putString("LName", LName.toUpperCase());
+                    myEdit.putString("UName", UName);
+                    myEdit.putString("Email", Email);
+                    myEdit.putString("Gender", Gender);
+                    myEdit.putString("Phone", Phone);
+                    myEdit.putString("Token", Token);
+                    myEdit.putString("DOB", dob);
+                    myEdit.putString("Profile", profile);
+                    Log.d("saurabh", "Profile " + profile);
+
+                    myEdit.apply();
+                    myEdit.commit();
+                    Intent intent = new Intent(EditProfile.this, MyAccount.class);
+                    setResult(2, intent);
                     finish();
+
+//                    fetchVM.loadFetchList(token);
+//                    finish();
                 }
             }
         });
+
+//        fetchVM = new ViewModelProvider(this, new FetchVMFactory(this)).get(FetchVM.class);
+//        fetchVM.getFetchListObserver().observe(this, new Observer<Data>() {
+//            @Override
+//            public void onChanged(Data data) {
+//                if(data != null){
+//                    String FName = data.getUserData().getFirstName();
+//                    String LName = data.getUserData().getLastName();
+//                    String UName = data.getUserData().getUsername();
+//                    String Email = data.getUserData().getEmail();
+//                    String Gender = data.getUserData().getGender();
+//                    String Phone = data.getUserData().getPhoneNo();
+//                    String Token = data.getUserData().getAccessToken();
+//                    String dob = String.valueOf(data.getUserData().getDob());
+//                    String profile = String.valueOf(data.getUserData().getProfilePic());
+//
+//                    SharedPreferences sharedPreferences = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
+//                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+//                    myEdit.putString("FName", FName.toUpperCase());
+//                    myEdit.putString("LName", LName.toUpperCase());
+//                    myEdit.putString("UName", UName);
+//                    myEdit.putString("Email", Email);
+//                    myEdit.putString("Gender", Gender);
+//                    myEdit.putString("Phone", Phone);
+//                    myEdit.putString("Token" ,Token);
+//                    myEdit.putString("DOB", dob);
+//                    myEdit.putString("Profile",profile);
+//                    Log.d("saurabh","Profile "+profile);
+//
+//                    myEdit.apply();
+//                    myEdit.commit();
+//                    Intent intent = new Intent(EditProfile.this, MyAccount.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//            }
+//        });
 
         imgbtn_Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,13 +195,13 @@ public class EditProfile extends AppCompatActivity {
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
-                DatePickerDialog datePickerDialog=new DatePickerDialog(EditProfile.this,R.style.DialogTheme,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditProfile.this, R.style.DialogTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 DOB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                             }
-                        },mYear, mMonth, mDay);
+                        }, mYear, mMonth, mDay);
                 datePickerDialog.show();
             }
         });
@@ -199,7 +257,18 @@ public class EditProfile extends AppCompatActivity {
                     System.out.println("-------------------------------------Data----------------------------------------");
                     System.out.println(token + " " + Fnames + "  " + Lnames + "  " + Emails + "  " + DOBs + "  " + Phones);
 
-                    editProfileVM.loadEditLists(token, Fnames, Lnames, Emails, DOBs, bitprofile, Phones);
+                    if (bitprofile.equals("")) {
+                        bitprofile = " ";
+                        editProfileVM.loadEditLists(token, Fnames, Lnames, Emails, DOBs, bitprofile, Phones);
+                        progressBar.setVisibility(View.VISIBLE);
+                        Submit.setVisibility(View.GONE);
+                        Log.d("saurabh", "if " + bitprofile);
+                    } else {
+                        editProfileVM.loadEditLists(token, Fnames, Lnames, Emails, DOBs, bitprofile, Phones);
+                        progressBar.setVisibility(View.VISIBLE);
+                        Submit.setVisibility(View.GONE);
+                        Log.d("saurabh", "else " + bitprofile);
+                    }
                 }
             }
         });
@@ -212,7 +281,7 @@ public class EditProfile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri path = data.getData();
-            Log.d("saurabh","path  "+path);
+            Log.d("saurabh", "path  " + path);
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
@@ -225,7 +294,7 @@ public class EditProfile extends AppCompatActivity {
             byte[] imgByte = byteArrayOutputStream.toByteArray();
             bitprofile = Base64.encodeToString(imgByte, Base64.DEFAULT);
             bitprofile = "data:image/jpg;base64," + bitprofile;
-            Log.d("saurabh","bit profilr "+bitprofile);
+            Log.d("saurabh", "bit profilr-- " + bitprofile);
         }
     }
 

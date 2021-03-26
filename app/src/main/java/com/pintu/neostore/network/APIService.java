@@ -6,6 +6,7 @@ import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductDetailed_APIMsg;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.Rate_Model.Rate_APIMsg;
+import com.pintu.neostore.model.fetch.FetchAPIMsg;
 import com.pintu.neostore.model.order.OrderAPIMsg;
 import com.pintu.neostore.model.order.Order_List.order_list_APIMsg;
 import com.pintu.neostore.model.order.order_details.OrderDetailsAPIMsg;
@@ -51,6 +52,9 @@ public interface APIService {
                           @Field("dob") String dob,
                           @Field("profile_pic") String profile_pic,
                           @Field("phone_no") String phone_no);
+
+    @GET("users/getUserData")
+    Call<FetchAPIMsg> fetchPost(@Header("access_token") String access_token);
 
     @FormUrlEncoded
     @POST("users/change")

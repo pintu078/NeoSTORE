@@ -41,36 +41,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/empty_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
-                android:visibility="gone"
-                >
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="262dp"
                     android:layout_height="308dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_empty_cart"
-                    />
+                    android:src="@drawable/ic_empty_cart" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NO ORDER"
                     android:layout_gravity="center"
+                    android:text="NO ORDER"
                     android:textColor="@color/titleBar"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:indeterminateTint="@color/titleBar"
+                android:visibility="gone" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -79,11 +84,6 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/activity_order_details_row" />
 
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -97,8 +97,7 @@
                     android:layout_marginLeft="30dp"
                     android:text="Total"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
 
                 <TextView
@@ -110,8 +109,7 @@
                     android:layout_marginRight="30dp"
                     android:text="Rs. 00"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
         </LinearLayout>

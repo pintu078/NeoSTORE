@@ -12,6 +12,7 @@ import com.pintu.neostore.drawer.tabel.ProductDetailed;
 public class AddressVMFactory extends ViewModelProvider.NewInstanceFactory {
 
     private Context context;
+
     public AddressVMFactory(Address address) {
         this.context = address;
     }
@@ -19,6 +20,6 @@ public class AddressVMFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T)new AddressVM(context);
+        return (T) new AddressVM(context);
     }
 }

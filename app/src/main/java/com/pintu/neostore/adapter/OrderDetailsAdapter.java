@@ -1,8 +1,6 @@
 package com.pintu.neostore.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.drawer.order.OrderDetails;
-import com.pintu.neostore.drawer.tabel.ProductDetailed;
-import com.pintu.neostore.model.order.Order_List.Datum;
-import com.pintu.neostore.model.order.order_details.Data;
 import com.pintu.neostore.model.order.order_details.OrderDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.MyViewHolder> {
-
 
     List<OrderDetail> al;
     Context context;
@@ -49,7 +42,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.od1.setText(al.get(position).getProdName());
         holder.od2.setText(al.get(position).getProdCatName());
         holder.qty.setText(al.get(position).getQuantity().toString());
-        holder.price.setText("₹. "+al.get(position).getTotal());
+        holder.price.setText("₹. " + al.get(position).getTotal());
     }
 
 
@@ -63,7 +56,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView od1,od2,price,qty;
+        TextView od1, od2, price, qty;
         ImageView Img;
 
         public MyViewHolder(View itemView) {
@@ -73,10 +66,6 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
             od2 = (TextView) itemView.findViewById(R.id.tv_order_2);
             qty = (TextView) itemView.findViewById(R.id.tv_order_3);
             price = (TextView) itemView.findViewById(R.id.tv_order_price);
-
-            context = itemView.getContext();
-
-
         }
     }
 }

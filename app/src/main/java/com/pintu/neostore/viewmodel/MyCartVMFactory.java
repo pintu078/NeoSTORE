@@ -10,12 +10,10 @@ import com.pintu.neostore.drawer.mycart.MyCart;
 
 public class MyCartVMFactory extends ViewModelProvider.NewInstanceFactory {
 
-    // private LoginModel loginModel;
     private Context context;
 
     public MyCartVMFactory(MyCart myCart) {
         this.context = myCart;
-        //     this.loginModel = loginModel;
     }
 
     @NonNull

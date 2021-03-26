@@ -38,11 +38,12 @@
                 android:layout_height="194dp"
                 android:layout_below="@id/head1pp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginBottom="15dp"
-                android:src="@drawable/cupboards" />
+                android:src="@drawable/cupboards"
+                 />
 
             <TextView
                 android:id="@+id/entr_quan"
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_mainpp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="24dp"
                 android:text="Enter Qty"
                 android:textColor="@color/Medium_Black"
                 android:textSize="21dp"
@@ -66,21 +67,38 @@
                 android:hint="enter quantity"
                 android:inputType="number"
                 android:textColor="@color/Medium_Black"
+                android:background="@drawable/stroke_box_green"
+                android:gravity="center"
+                android:padding="10dp"
                 android:textSize="20sp" />
 
             <Button
                 android:id="@+id/btn_resetpp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ed_quantity"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/titleBar"
                 android:text="SUBMIT"
+                android:textSize="24sp"
                 android:textColor="@color/white"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 />
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:indeterminateTint="@color/white"
+                android:layout_below="@id/ed_quantity"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                 />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

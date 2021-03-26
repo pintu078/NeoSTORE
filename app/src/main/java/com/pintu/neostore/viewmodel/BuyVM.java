@@ -26,8 +26,6 @@ public class BuyVM extends ViewModel {
     public BuyVM(Context context) {
 
         this.context = context;
-        //   this.loginModel=loginModel;
-        //     loginList = new MutableLiveData<>();
     }
 
 
@@ -35,12 +33,12 @@ public class BuyVM extends ViewModel {
 
         if (buy_list == null) {
             buy_list = new MutableLiveData<>();
-            //  loadProductLists();
         }
         return buy_list;
     }
 
     public void loadBuy(String header, String product_Id, String quantity) {
+
         APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
         System.out.println();
         Call<Cart_APIMSg> call = apiService.buyPost(header, product_Id, quantity);
@@ -53,8 +51,8 @@ public class BuyVM extends ViewModel {
                     response.code();
                     buy_list.postValue(response.body());
 
-
                     Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
+
 
                 } else {
                     System.out.println(" response  code   " + response.code());
@@ -67,9 +65,11 @@ public class BuyVM extends ViewModel {
                                 context,
                                 jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
+
                     } catch (Exception e) {
 
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
@@ -81,7 +81,9 @@ public class BuyVM extends ViewModel {
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff------UnSucessful------------------");
+
             }
         });
     }
+
 }

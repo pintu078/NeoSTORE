@@ -12,12 +12,14 @@ import com.pintu.neostore.drawer.MyAccount.EditProfile;
 public class EditVMFactory extends ViewModelProvider.NewInstanceFactory {
 
     private Context context;
+
     public EditVMFactory(EditProfile editProfile) {
         this.context = editProfile;
     }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T)new EditProfileVM(context);
+        return (T) new EditProfileVM(context);
     }
 }

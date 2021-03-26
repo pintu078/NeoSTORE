@@ -11,13 +11,15 @@ import com.pintu.neostore.forgot.Forgot;
 public class ForgotVMFactory extends ViewModelProvider.NewInstanceFactory {
 
     private Context context;
+
     public ForgotVMFactory(Forgot forgot) {
         this.context = forgot;
     }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T)new ForgotVM(context);
+        return (T) new ForgotVM(context);
     }
 
 

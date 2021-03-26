@@ -2,11 +2,14 @@ package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.pintu.neostore.drawer.order.Address;
+import com.pintu.neostore.login.Login;
 import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.order.OrderAPIMsg;
 import com.pintu.neostore.network.APIService;
@@ -44,6 +47,7 @@ public class AddressVM extends ViewModel {
                 if (response.isSuccessful()) {
                     address_list.postValue(response.body());
                     Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
+                    visible();
 
                 } else {
                     System.out.println(" response  code   " + response.code());
@@ -56,9 +60,11 @@ public class AddressVM extends ViewModel {
                                 context,
                                 jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
+                        visible();
                     } catch (Exception e) {
 
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        visible();
                     }
                 }
             }
@@ -69,9 +75,13 @@ public class AddressVM extends ViewModel {
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff---dd---UnSucessful------------------");
-
+                visible();
             }
         });
+    }
+    public void visible(){
+        Address.order.setVisibility(View.VISIBLE);
+        Address.progressBar.setVisibility(View.GONE);
     }
 }
 

@@ -16,18 +16,13 @@ import android.widget.TextView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.OrderDetailsAdapter;
-import com.pintu.neostore.adapter.OrderListAdapter;
 import com.pintu.neostore.login.Login;
-import com.pintu.neostore.model.order.Order_List.Datum;
 import com.pintu.neostore.model.order.order_details.Data;
 import com.pintu.neostore.model.order.order_details.OrderDetail;
 import com.pintu.neostore.viewmodel.OrderDetailsVM;
 import com.pintu.neostore.viewmodel.OrderDetailsVMFactory;
-import com.pintu.neostore.viewmodel.OrderListVM;
-import com.pintu.neostore.viewmodel.OrderListVMFactory;
 
 import java.util.List;
-
 
 public class OrderDetails extends AppCompatActivity {
 
@@ -37,7 +32,7 @@ public class OrderDetails extends AppCompatActivity {
     SharedPreferences sp;
     String token,ids;
 
-    ProgressBar progressBar;
+    public static ProgressBar progressBar;
     ImageButton imgBtn;
     TextView toolText,total;
 
@@ -74,8 +69,6 @@ public class OrderDetails extends AppCompatActivity {
                 orderDetailsAdapter = new OrderDetailsAdapter(OrderDetails.this, list);
                 orderDetailsAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(orderDetailsAdapter);
-                progressBar.setVisibility(View.GONE);
-
 
                 total.setText("₹ " + data.getCost());
             }

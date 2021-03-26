@@ -2,21 +2,19 @@ package com.pintu.neostore.viewmodel;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.model.order.Order_List.Datum;
-import com.pintu.neostore.model.order.Order_List.order_list_APIMsg;
+import com.pintu.neostore.drawer.order.OrderDetails;
 import com.pintu.neostore.model.order.order_details.Data;
 import com.pintu.neostore.model.order.order_details.OrderDetailsAPIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
 
 import org.json.JSONObject;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +49,7 @@ public class OrderDetailsVM extends ViewModel {
 
                     //  order_list.postValue(response.body());
                    //   Toast.makeText(context, response.body().getUserMsg(), Toast.LENGTH_SHORT).show();
+                    visible();
 
                 } else {
                     System.out.println(" response  code   " + response.code());
@@ -63,9 +62,11 @@ public class OrderDetailsVM extends ViewModel {
                                 context,
                                 jObjError.getString("user_msg"),
                                 Toast.LENGTH_SHORT).show();
+                        visible();
                     } catch (Exception e) {
 
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        visible();
                     }
                 }
             }
@@ -76,8 +77,11 @@ public class OrderDetailsVM extends ViewModel {
                 System.out.println("-------------------------------------------------------");
                 System.out.println(t.getMessage());
                 System.out.println("------------ff---dd---UnSucessful------------------");
-
+                visible();
             }
         });
+    }
+    public void visible(){
+        OrderDetails.progressBar.setVisibility(View.GONE);
     }
 }

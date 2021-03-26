@@ -1,10 +1,12 @@
 package com.pintu.neostore.forgot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +23,9 @@ public class Forgot extends AppCompatActivity {
 
     private APIMsg message;
 
-    TextView  Email;
-    Button  Submit;
+    TextView Email;
+    public static Button Submit;
+    public static ProgressBar progressBar;
 
     String Emails;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -34,24 +37,24 @@ public class Forgot extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.forgot_main);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setTitle("Forgot Password");
 
-        Email = (TextView)findViewById(R.id.ed_email);
-        Submit = (Button)findViewById(R.id.btn_submit);
+        Email = (TextView) findViewById(R.id.ed_email);
+        Submit = (Button) findViewById(R.id.btn_submit);
+        progressBar =(ProgressBar)findViewById(R.id.progress_bar);
 
-        forgotVM = new ViewModelProvider(this,new ForgotVMFactory(this)).get(ForgotVM.class);
+        forgotVM = new ViewModelProvider(this, new ForgotVMFactory(this)).get(ForgotVM.class);
         forgotVM.getForgotListObserver().observe(this, new Observer<APIMsg>() {
             @Override
             public void onChanged(APIMsg apiMsg) {
                 System.out.println("---------1-------");
-                if(apiMsg != null){
+                if (apiMsg != null) {
                     System.out.println("---------2-------");
+                    Intent intent = new Intent(com.pintu.neostore.forgot.Forgot.this, com.pintu.neostore.login.Login.class);
+                   // startActivity(intent);
+                    setResult(2,intent);
+                    finish();
 
-                }else{
+                } else {
                     System.out.println("---------3-------");
 
                 }
@@ -62,23 +65,23 @@ public class Forgot extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Emails =Email.getText().toString().trim();
+                Emails = Email.getText().toString().trim();
 
-                if(Emails.length() == 0 || !Emails.matches(emailPattern)){
-                    if(Emails.length()==0){
+                if (Emails.length() == 0 || !Emails.matches(emailPattern)) {
+                    if (Emails.length() == 0) {
                         Email.requestFocus();
                         Email.setError("FIELD CANNOT BE EMPTY");
-                    }else if(Emails.length()!=0 && !Emails.matches(emailPattern)){
+                    } else if (Emails.length() != 0 && !Emails.matches(emailPattern)) {
                         Email.requestFocus();
                         Email.setError("Invalid Email");
                     }
-                }else{
+                } else {
 
                     forgotVM.forgotApiCall(Emails);
-
+                    Submit.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
-
 }

@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fe3f3f"
+    android:background="@color/backgroundRed"
+    android:orientation="vertical"
     tools:context=".drawer.MyAccount.MyAccount">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fe3f3f"
-        android:paddingBottom="30dp"
-        android:orientation="vertical"
-        tools:context=".register.Register">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -43,101 +39,119 @@
 
             </TextView>
         </androidx.appcompat.widget.Toolbar>
-
-        <TextView
-            android:id="@+id/tv_neoStore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_gravity="center_horizontal"
-            android:text="NeoSTORE"
-            android:textColor="@color/textColor"
-            android:textSize="51sp"
-            android:textStyle="bold"
-           />
-
-
-        <EditText
-            android:id="@+id/ed_curr_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="38dp"
-            android:layout_marginRight="38dp"
-            android:layout_marginTop="56dp"
-            android:background="@drawable/stroke_box"
-            android:drawableLeft="@drawable/ic_vector_assest_person"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="Current Password"
-            android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="18sp"
-            />
-
-        <EditText
-            android:id="@+id/ed_new_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="38dp"
-            android:background="@drawable/stroke_box"
-            android:drawableLeft="@drawable/ic_vector_assest_person"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="New Password"
-            android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="18sp"
-            />
-
-        <EditText
-            android:id="@+id/ed_con_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="38dp"
-            android:background="@drawable/stroke_box"
-            android:drawableLeft="@drawable/ic_vector_assest_email"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="18sp"
-            />
-
-        <Button
-            android:id="@+id/btn_reset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="38dp"
-            android:background="@drawable/rounded_button"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:text="Reset Password"
-            android:textColor="#E91C1A"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            />
     </LinearLayout>
-</RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundRed"
+            android:orientation="vertical"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:id="@+id/tv_neoStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:text="NeoSTORE"
+                android:textColor="@color/textColor"
+                android:textSize="51sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/ed_curr_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/stroke_box"
+                android:drawableLeft="@drawable/ic_vector_assest_person"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Current Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/ed_new_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/stroke_box"
+                android:drawableLeft="@drawable/ic_vector_assest_person"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="New Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/ed_con_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/stroke_box"
+                android:drawableLeft="@drawable/ic_vector_assest_email"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_reset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/rounded_button"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="Reset Password"
+                android:textColor="#E91C1A"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
 

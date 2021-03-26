@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.MyCartAdapter;
 import com.pintu.neostore.drawer.order.Address;
+import com.pintu.neostore.drawer.order.OrderDetails;
 import com.pintu.neostore.login.Login;
 import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
@@ -44,6 +46,7 @@ public class MyCart extends AppCompatActivity {
     TextView total, totalTxt;
     Button order;
     LinearLayout empty_Layout;
+    public static ProgressBar progressBar;
     ImageButton delete, back_btn;
     Boolean flag = true;
     String token;
@@ -59,8 +62,11 @@ public class MyCart extends AppCompatActivity {
         empty_Layout = (LinearLayout) findViewById(R.id.empty_layout);
         back_btn = (ImageButton) findViewById(R.id.back_btn);
         order = (Button) findViewById(R.id.btn_order);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+        final SharedPreferences.Editor myEdit = sp.edit();
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -77,7 +83,8 @@ public class MyCart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MyCart.this, Address.class);
-                startActivity(intent);
+                //startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -95,10 +102,15 @@ public class MyCart extends AppCompatActivity {
                         recyclerView.setAdapter(myCartAdapter);
 
                         total.setText("₹ " + listCartItem_apiMsg.getTotal() + "0.0");
+
+                        myEdit.putString("cart", listCartItem_apiMsg.getCount().toString());
+                        myEdit.commit();
                         Log.d("saurah", "MyCart Success  " + listCartItem_apiMsg.getTotal());
                     } else {
                         myCartAdapter = new MyCartAdapter(MyCart.this, list);
                         recyclerView.setAdapter(myCartAdapter);
+                        myEdit.putString("cart", "0");
+                        myEdit.commit();
                         setGone();
                     }
                 } else {
@@ -116,9 +128,11 @@ public class MyCart extends AppCompatActivity {
                 if (deleteCart_apiMsg != null) {
                     if (deleteCart_apiMsg.getTotalCarts() != 0) {
                         myCartVM.loadMyCart(token);
+                        progressBar.setVisibility(View.VISIBLE);
                         flag = false;
                     } else {
                         myCartVM.loadMyCart(token);
+                        progressBar.setVisibility(View.VISIBLE);
                         setGone();
                     }
                 }
@@ -132,16 +146,18 @@ public class MyCart extends AppCompatActivity {
                 if (editCart_apimSg != null) {
 
                     myCartVM.loadMyCart(token);
+                    progressBar.setVisibility(View.VISIBLE);
                     flag = false;
 
                 }
             }
         });
 
-        sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
+
         token = sp.getString("Token", "");
         if (flag == true) {
             myCartVM.loadMyCart(token);
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 

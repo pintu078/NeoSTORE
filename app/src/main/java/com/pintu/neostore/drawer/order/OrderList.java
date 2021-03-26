@@ -1,6 +1,5 @@
 package com.pintu.neostore.drawer.order;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,11 +14,8 @@ import android.widget.ProgressBar;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.OrderListAdapter;
-import com.pintu.neostore.adapter.ProductListAdapter;
-import com.pintu.neostore.drawer.tabel.Tables;
 import com.pintu.neostore.login.Login;
 import com.pintu.neostore.model.order.Order_List.Datum;
-import com.pintu.neostore.model.order.Order_List.order_list_APIMsg;
 import com.pintu.neostore.viewmodel.OrderListVM;
 import com.pintu.neostore.viewmodel.OrderListVMFactory;
 
@@ -34,7 +30,7 @@ public class OrderList extends AppCompatActivity {
     SharedPreferences sp;
     String token;
 
-    ProgressBar progressBar;
+    public static ProgressBar progressBar;
     ImageButton imgBtn;
 
     @Override
@@ -58,7 +54,6 @@ public class OrderList extends AppCompatActivity {
                 orderListAdapter = new OrderListAdapter(OrderList.this, data);
                 orderListAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(orderListAdapter);
-                progressBar.setVisibility(View.GONE);
 
             }
         });
@@ -74,6 +69,7 @@ public class OrderList extends AppCompatActivity {
         token = sp.getString("Token","");
 
         orderListVM.loadOrderList(token);
+        progressBar.setVisibility(View.VISIBLE);
 
     }
 }
