@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".drawer.mycart.MyCart">
+    tools:context=".view.drawer.mycart.MyCart">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
-                    android:text="Rs. 180"
+                    android:text="₹ 00"
                     android:textSize="16dp"
                     android:textStyle="bold" />
             </RelativeLayout>

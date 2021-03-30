@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.drawer.MyAccount.EditProfile;
+import com.pintu.neostore.view.drawer.MyAccount.EditProfile;
 
 
 public class EditVMFactory extends ViewModelProvider.NewInstanceFactory {

@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.order;
+package com.pintu.neostore.view.drawer.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.OrderDetailsAdapter;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.order.order_details.Data;
 import com.pintu.neostore.model.order.order_details.OrderDetail;
 import com.pintu.neostore.viewmodel.OrderDetailsVM;

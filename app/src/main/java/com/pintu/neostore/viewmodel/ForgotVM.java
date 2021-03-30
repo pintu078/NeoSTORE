@@ -7,8 +7,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.forgot.Forgot;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.forgot.Forgot;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.RetroInstance;

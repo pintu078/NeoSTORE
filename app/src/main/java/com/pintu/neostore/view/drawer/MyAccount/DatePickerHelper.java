@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.MyAccount;
+package com.pintu.neostore.view.drawer.MyAccount;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.View;

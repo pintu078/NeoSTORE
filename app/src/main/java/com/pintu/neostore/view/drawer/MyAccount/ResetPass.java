@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.MyAccount;
+package com.pintu.neostore.view.drawer.MyAccount;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -15,10 +15,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.APIMsg;
 
-import com.pintu.neostore.viewmodel.FetchVM;
 import com.pintu.neostore.viewmodel.ResetVM;
 import com.pintu.neostore.viewmodel.ResetVMFactory;
 

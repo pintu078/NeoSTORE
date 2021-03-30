@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.pintu.neostore.home.Home;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.home.Home;
+import com.pintu.neostore.view.login.Login;
 
 public class MainActivity extends AppCompatActivity {
 

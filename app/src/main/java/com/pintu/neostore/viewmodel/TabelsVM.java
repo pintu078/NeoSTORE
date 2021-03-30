@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
-import com.pintu.neostore.drawer.tabel.Tables;
+import com.pintu.neostore.view.drawer.tabel.Tables;
 import com.pintu.neostore.model.ProductList_APIMsg;
 import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.network.APIService;

@@ -7,11 +7,10 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
-import com.pintu.neostore.register.Register;
 
 import org.json.JSONObject;
 

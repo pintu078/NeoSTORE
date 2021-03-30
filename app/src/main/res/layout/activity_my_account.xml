@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fe3f3f"
-    tools:context=".drawer.MyAccount.MyAccount">
+    tools:context=".view.drawer.MyAccount.MyAccount">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:background="#fe3f3f"
         android:paddingBottom="30dp"
         android:orientation="vertical"
-        tools:context=".register.Register">
+        tools:context=".view.register.Register">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -44,18 +44,41 @@
             </TextView>
         </androidx.appcompat.widget.Toolbar>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_img"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:src="@drawable/img_profile"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="21dp">
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_img"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/circular_button"
+                android:backgroundTint="@color/yellow"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="21dp">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/tv_img"
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:text="PP"
+                android:visibility="invisible"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                />
+
+        </RelativeLayout>
 
 
 

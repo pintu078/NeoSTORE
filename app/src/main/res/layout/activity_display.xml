@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context=".register.Display">
+    tools:context=".view.register.Display">
 
     <TextView
         android:id="@+id/received_value_idd"

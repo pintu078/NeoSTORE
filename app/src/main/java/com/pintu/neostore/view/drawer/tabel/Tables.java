@@ -1,19 +1,23 @@
-package com.pintu.neostore.drawer.tabel;
+package com.pintu.neostore.view.drawer.tabel;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ProductListAdapter;
@@ -30,6 +34,7 @@ public class Tables extends AppCompatActivity {
     RecyclerView recyclerView;
     private TabelsVM tabelsVM;
     ProductListAdapter productListAdapter;
+    EditText inputSearch;
     Boolean isScrolling = false;
     int currentItems, totalItems, scrollOutItems;
     ArrayList<ProductList_Data> list1 = new ArrayList<>();
@@ -45,6 +50,7 @@ public class Tables extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tables);
         ImageButton imgbtn = findViewById(R.id.imgbtn);
+        inputSearch = findViewById(R.id.input_search);
 
         nestedScrollView = findViewById(R.id.scroll_view);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -124,7 +130,7 @@ public class Tables extends AppCompatActivity {
                     page++;
                     progressBar.setVisibility(View.VISIBLE);
                     tabelsVM.loadProductLists(id, li, page);
-                     // progressBar.setVisibility(View.GONE);
+                    // progressBar.setVisibility(View.GONE);
                     Log.d("saurabh", "onscrollchange executed");
 
 
@@ -132,6 +138,43 @@ public class Tables extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+
+        MenuItem search = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        search(searchView);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                productListAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+    }
 }
+
+
+

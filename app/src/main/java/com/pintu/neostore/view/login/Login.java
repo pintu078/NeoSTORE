@@ -1,4 +1,4 @@
-package com.pintu.neostore.login;
+package com.pintu.neostore.view.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.R;
-import com.pintu.neostore.register.Register;
 import com.pintu.neostore.viewmodel.LoginVM;
 import com.pintu.neostore.viewmodel.LoginVMFactory;
 
@@ -81,21 +80,12 @@ public class Login extends AppCompatActivity {
                     myEdit.putString("Phone", Phone);
                     myEdit.putString("Token", Token);
                     myEdit.putString("DOB", dob);
-//
-//                    if (profile.equals(null)) {
-//                        myEdit.putString("Profile", profile);
-//                        Log.d("saurabh", "profile" + profile);
-//                    } else {
-//                        myEdit.putString("Profile", FName.substring(0, 1) + LName.substring(0, 1));
-//                        Log.d("saurabh", "null " + FName.substring(0, 1) + LName.substring(0, 1));
-//                    }
-                    myEdit.putString("Profile", profile);
-                    Log.d("saurabh", "profile" + profile);
+                    myEdit.putString("Profile",profile);
 
                     myEdit.commit();
                     System.out.println("---------" + FName + LName + UName + Email);
 
-                    Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.home.Home.class);
+                    Intent intent = new Intent(com.pintu.neostore.view.login.Login.this, com.pintu.neostore.view.home.Home.class);
                     startActivity(intent);
                     finish();
                 } else {
@@ -111,7 +101,7 @@ public class Login extends AppCompatActivity {
         Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.forgot.Forgot.class);
+                Intent intent = new Intent(com.pintu.neostore.view.login.Login.this, com.pintu.neostore.view.forgot.Forgot.class);
                 // startActivity(intent);
                 startActivityForResult(intent, 2);
 
@@ -122,7 +112,7 @@ public class Login extends AppCompatActivity {
         Fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(com.pintu.neostore.login.Login.this, com.pintu.neostore.register.Register.class);
+                Intent intent = new Intent(com.pintu.neostore.view.login.Login.this, com.pintu.neostore.view.register.Register.class);
                 startActivityForResult(intent, 2);
             }
         });
@@ -160,5 +150,10 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

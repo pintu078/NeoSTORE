@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;
-import com.pintu.neostore.register.Register;
+import com.pintu.neostore.view.register.Register;
 
 
 import org.json.JSONObject;

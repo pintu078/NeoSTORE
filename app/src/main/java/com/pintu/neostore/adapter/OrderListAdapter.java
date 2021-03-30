@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.drawer.order.OrderDetails;
+import com.pintu.neostore.view.drawer.order.OrderDetails;
 import com.pintu.neostore.model.order.Order_List.Datum;
 
 import java.util.List;

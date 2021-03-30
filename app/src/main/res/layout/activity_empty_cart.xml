@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".drawer.mycart.empty_cart">
+    tools:context=".view.drawer.mycart.empty_cart">
 
     <ImageView
         android:id="@+id/imageView"

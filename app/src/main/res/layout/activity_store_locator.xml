@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".drawer.store_locator.StoreLocator">
+    tools:context=".view.drawer.store_locator.StoreLocator">
 
 
     <androidx.appcompat.widget.Toolbar

@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.MyAccount;
+package com.pintu.neostore.view.drawer.MyAccount;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,16 +21,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.APIMsg;
-import com.pintu.neostore.model.fetch.Data;
 import com.pintu.neostore.viewmodel.EditProfileVM;
 import com.pintu.neostore.viewmodel.EditVMFactory;
 import com.pintu.neostore.viewmodel.FetchVM;
-import com.pintu.neostore.viewmodel.FetchVMFactory;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +40,7 @@ import java.util.Calendar;
 public class EditProfile extends AppCompatActivity {
 
     EditText FirstName, LastName, Email, Phone, DOB;
+    TextView tv_Img;
     public static Button Submit;
     ImageButton imgbtn_Back;
     ImageView imgProfile;
@@ -75,6 +75,7 @@ public class EditProfile extends AppCompatActivity {
         imgbtn_Back = (ImageButton) findViewById(R.id.imgbtn_back);
         profileImg = findViewById(R.id.profile_img);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        tv_Img = (TextView)findViewById(R.id.tv_img);
 
         sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
         FirstName.setText(sp.getString("FName", ""));
@@ -83,13 +84,24 @@ public class EditProfile extends AppCompatActivity {
         Phone.setText(sp.getString("Phone", ""));
         DOB.setText(sp.getString("DOB", "00-00-0000"));
         token = sp.getString("Token", "");
+
         String image = sp.getString("Profile", "");
-        if (!image.equals("")) {
+        Log.d("saurabh","image "+image);
+
+        if (!image.equals("null")) {
             Picasso.with(getApplicationContext())
                     .load(image)
                     .fit()
                     .into(profileImg);
             Log.d("saurabh", token + "  edit");
+            tv_Img.setVisibility(View.INVISIBLE);
+        }else{
+            tv_Img.setVisibility(View.VISIBLE);
+            String fini=(sp.getString("FName","")).toUpperCase();
+            String lini=(sp.getString("LName","")).toUpperCase();
+            String initials=fini.substring(0,1)+lini.substring(0,1);
+
+            tv_Img.setText(initials);
         }
 
         editProfileVM = new ViewModelProvider(this, new EditVMFactory(this)).get(EditProfileVM.class);
@@ -120,7 +132,8 @@ public class EditProfile extends AppCompatActivity {
                     myEdit.putString("Token", Token);
                     myEdit.putString("DOB", dob);
                     myEdit.putString("Profile", profile);
-                    Log.d("saurabh", "Profile " + profile);
+
+                   // Log.d("saurabh", "Profile " + profile);
 
                     myEdit.apply();
                     myEdit.commit();
@@ -128,48 +141,9 @@ public class EditProfile extends AppCompatActivity {
                     setResult(2, intent);
                     finish();
 
-//                    fetchVM.loadFetchList(token);
-//                    finish();
                 }
             }
         });
-
-//        fetchVM = new ViewModelProvider(this, new FetchVMFactory(this)).get(FetchVM.class);
-//        fetchVM.getFetchListObserver().observe(this, new Observer<Data>() {
-//            @Override
-//            public void onChanged(Data data) {
-//                if(data != null){
-//                    String FName = data.getUserData().getFirstName();
-//                    String LName = data.getUserData().getLastName();
-//                    String UName = data.getUserData().getUsername();
-//                    String Email = data.getUserData().getEmail();
-//                    String Gender = data.getUserData().getGender();
-//                    String Phone = data.getUserData().getPhoneNo();
-//                    String Token = data.getUserData().getAccessToken();
-//                    String dob = String.valueOf(data.getUserData().getDob());
-//                    String profile = String.valueOf(data.getUserData().getProfilePic());
-//
-//                    SharedPreferences sharedPreferences = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
-//                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
-//                    myEdit.putString("FName", FName.toUpperCase());
-//                    myEdit.putString("LName", LName.toUpperCase());
-//                    myEdit.putString("UName", UName);
-//                    myEdit.putString("Email", Email);
-//                    myEdit.putString("Gender", Gender);
-//                    myEdit.putString("Phone", Phone);
-//                    myEdit.putString("Token" ,Token);
-//                    myEdit.putString("DOB", dob);
-//                    myEdit.putString("Profile",profile);
-//                    Log.d("saurabh","Profile "+profile);
-//
-//                    myEdit.apply();
-//                    myEdit.commit();
-//                    Intent intent = new Intent(EditProfile.this, MyAccount.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            }
-//        });
 
         imgbtn_Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +173,7 @@ public class EditProfile extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                DOB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                                DOB.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -258,7 +232,7 @@ public class EditProfile extends AppCompatActivity {
                     System.out.println(token + " " + Fnames + "  " + Lnames + "  " + Emails + "  " + DOBs + "  " + Phones);
 
                     if (bitprofile.equals("")) {
-                        bitprofile = " ";
+                        bitprofile="";
                         editProfileVM.loadEditLists(token, Fnames, Lnames, Emails, DOBs, bitprofile, Phones);
                         progressBar.setVisibility(View.VISIBLE);
                         Submit.setVisibility(View.GONE);
@@ -272,8 +246,6 @@ public class EditProfile extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     @Override
@@ -294,8 +266,8 @@ public class EditProfile extends AppCompatActivity {
             byte[] imgByte = byteArrayOutputStream.toByteArray();
             bitprofile = Base64.encodeToString(imgByte, Base64.DEFAULT);
             bitprofile = "data:image/jpg;base64," + bitprofile;
+            tv_Img.setVisibility(View.INVISIBLE);
             Log.d("saurabh", "bit profilr-- " + bitprofile);
         }
     }
-
 }

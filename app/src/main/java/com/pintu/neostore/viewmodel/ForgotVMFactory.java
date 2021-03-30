@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.forgot.Forgot;
+import com.pintu.neostore.view.forgot.Forgot;
 
 public class ForgotVMFactory extends ViewModelProvider.NewInstanceFactory {
 

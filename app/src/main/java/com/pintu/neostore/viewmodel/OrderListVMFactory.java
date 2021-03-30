@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.drawer.order.Address;
-import com.pintu.neostore.drawer.order.OrderList;
+import com.pintu.neostore.view.drawer.order.OrderList;
 
 public class OrderListVMFactory extends ViewModelProvider.NewInstanceFactory {
 

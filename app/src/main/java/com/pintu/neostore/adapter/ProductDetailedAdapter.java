@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.drawer.tabel.ProductDetailed;
+import com.pintu.neostore.view.drawer.tabel.ProductDetailed;
 import com.pintu.neostore.model.ProductDetailed_Model.ProductImage;
 import com.squareup.picasso.Picasso;
 

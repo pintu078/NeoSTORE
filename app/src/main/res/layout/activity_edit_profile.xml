@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fe3f3f"
     android:orientation="vertical"
-    tools:context=".drawer.MyAccount.MyAccount">
+    tools:context=".view.drawer.MyAccount.MyAccount">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -45,19 +45,41 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_img"
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="21dp"
-                android:layout_marginBottom="25dp"
-                android:clickable="true"
-                android:src="@drawable/img_profile"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="2dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_img"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/circular_button"
+                    android:backgroundTint="@color/yellow"
+                    android:clickable="true"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:id="@+id/tv_img"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/circular_button"
+                    android:backgroundTint="@color/yellow"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:text="PP"
+                    android:textSize="60sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    />
+
+            </RelativeLayout>
 
 
             <EditText
@@ -156,6 +178,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="D.O.B"
+                android:focusable="false"
                 android:inputType="date"
                 android:maxLength="10"
                 android:paddingLeft="10dp"
@@ -189,7 +212,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:indeterminateTint="@color/white"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

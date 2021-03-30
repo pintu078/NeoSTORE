@@ -1,4 +1,4 @@
-package com.pintu.neostore.register;
+package com.pintu.neostore.view.register;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.R;
 

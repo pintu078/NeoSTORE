@@ -26,21 +26,21 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCk5PA2DfmCCF7nI9YbZ0PfB2I8VyYg4KQ" />
 
-        <activity android:name=".drawer.store_locator.StoreLocator"></activity>
-        <activity android:name=".drawer.order.OrderDetails" />
-        <activity android:name=".drawer.order.OrderList" />
-        <activity android:name=".drawer.order.Address" />
-        <activity android:name=".drawer.mycart.empty_cart" />
-        <activity android:name=".drawer.tabel.ProductDetailed" />
-        <activity android:name=".drawer.MyAccount.ResetPass" />
-        <activity android:name=".drawer.MyAccount.EditProfile" />
-        <activity android:name=".drawer.tabel.Tables" />
-        <activity android:name=".drawer.MyAccount.MyAccount" />
-        <activity android:name=".drawer.mycart.MyCart" />
-        <activity android:name=".home.Home" />
-        <activity android:name=".register.Register" />
-        <activity android:name=".forgot.Forgot" />
-        <activity android:name=".login.Login" />
+        <activity android:name=".view.drawer.store_locator.StoreLocator"></activity>
+        <activity android:name=".view.drawer.order.OrderDetails" />
+        <activity android:name=".view.drawer.order.OrderList" />
+        <activity android:name=".view.drawer.order.Address" />
+        <activity android:name=".view.drawer.mycart.empty_cart" />
+        <activity android:name=".view.drawer.tabel.ProductDetailed" />
+        <activity android:name=".view.drawer.MyAccount.ResetPass" />
+        <activity android:name=".view.drawer.MyAccount.EditProfile" />
+        <activity android:name=".view.drawer.tabel.Tables" />
+        <activity android:name=".view.drawer.MyAccount.MyAccount" />
+        <activity android:name=".view.drawer.mycart.MyCart" />
+        <activity android:name=".view.home.Home" />
+        <activity android:name=".view.register.Register" />
+        <activity android:name=".view.forgot.Forgot" />
+        <activity android:name=".view.login.Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

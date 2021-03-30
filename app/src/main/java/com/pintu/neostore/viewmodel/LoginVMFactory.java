@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.login.Login;
 
 public class LoginVMFactory extends ViewModelProvider.NewInstanceFactory {
 

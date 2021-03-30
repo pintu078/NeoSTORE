@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.drawer.order.OrderDetails;
+import com.pintu.neostore.view.drawer.order.OrderDetails;
 import com.pintu.neostore.model.order.order_details.Data;
 import com.pintu.neostore.model.order.order_details.OrderDetailsAPIMsg;
 import com.pintu.neostore.network.APIService;

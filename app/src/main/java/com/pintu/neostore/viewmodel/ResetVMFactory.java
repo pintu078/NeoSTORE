@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.drawer.MyAccount.ResetPass;
+import com.pintu.neostore.view.drawer.MyAccount.ResetPass;
 
 public class ResetVMFactory extends ViewModelProvider.NewInstanceFactory {
 

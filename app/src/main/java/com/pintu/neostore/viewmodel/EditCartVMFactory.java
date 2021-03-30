@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.adapter.MyCartAdapter;
-import com.pintu.neostore.drawer.mycart.MyCart;
+import com.pintu.neostore.view.drawer.mycart.MyCart;
 
 public class EditCartVMFactory extends ViewModelProvider.NewInstanceFactory {
 

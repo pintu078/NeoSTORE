@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.order;
+package com.pintu.neostore.view.drawer.order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -15,8 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.drawer.mycart.MyCart;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.drawer.mycart.MyCart;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.order.OrderAPIMsg;
 import com.pintu.neostore.viewmodel.AddressVM;
 import com.pintu.neostore.viewmodel.AddressVMFactory;

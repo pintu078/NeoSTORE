@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".drawer.order.OrderList">
+    tools:context=".view.drawer.order.OrderList">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_silver"
     android:orientation="vertical"
-    tools:context=".drawer.tabel.ProductDetailed">
+    tools:context=".view.drawer.tabel.ProductDetailed">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

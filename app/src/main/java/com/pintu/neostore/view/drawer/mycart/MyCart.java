@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.mycart;
+package com.pintu.neostore.view.drawer.mycart;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -19,9 +19,8 @@ import android.widget.TextView;
 
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.MyCartAdapter;
-import com.pintu.neostore.drawer.order.Address;
-import com.pintu.neostore.drawer.order.OrderDetails;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.drawer.order.Address;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.Cart.Cart_APIMSg;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_APIMsg;
 import com.pintu.neostore.model.Cart.listcart_items.ListCartItem_Data;

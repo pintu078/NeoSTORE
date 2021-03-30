@@ -1,9 +1,8 @@
-package com.pintu.neostore.drawer.mycart;
+package com.pintu.neostore.view.drawer.mycart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 
 import com.pintu.neostore.R;
 

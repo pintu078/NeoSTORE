@@ -7,7 +7,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.pintu.neostore.drawer.MyAccount.ResetPass;
+import com.pintu.neostore.view.drawer.MyAccount.ResetPass;
 import com.pintu.neostore.model.APIMsg;
 import com.pintu.neostore.network.APIService;
 import com.pintu.neostore.network.RetroInstance;

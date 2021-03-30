@@ -1,4 +1,4 @@
-package com.pintu.neostore.forgot;
+package com.pintu.neostore.view.forgot;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,7 +49,7 @@ public class Forgot extends AppCompatActivity {
                 System.out.println("---------1-------");
                 if (apiMsg != null) {
                     System.out.println("---------2-------");
-                    Intent intent = new Intent(com.pintu.neostore.forgot.Forgot.this, com.pintu.neostore.login.Login.class);
+                    Intent intent = new Intent(com.pintu.neostore.view.forgot.Forgot.this, com.pintu.neostore.view.login.Login.class);
                    // startActivity(intent);
                     setResult(2,intent);
                     finish();

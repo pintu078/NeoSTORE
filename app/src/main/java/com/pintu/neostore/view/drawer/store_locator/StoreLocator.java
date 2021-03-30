@@ -1,4 +1,4 @@
-package com.pintu.neostore.drawer.store_locator;
+package com.pintu.neostore.view.drawer.store_locator;
 
 
 import androidx.appcompat.app.AppCompatActivity;

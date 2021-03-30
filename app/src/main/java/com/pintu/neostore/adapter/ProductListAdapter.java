@@ -2,25 +2,30 @@ package com.pintu.neostore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
-import com.pintu.neostore.drawer.tabel.ProductDetailed;
-import com.pintu.neostore.model.ProductList_APIMsg;
+import com.pintu.neostore.view.drawer.tabel.ProductDetailed;
 import com.pintu.neostore.model.ProductList_Data;
 import com.squareup.picasso.Picasso;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> {
 
@@ -31,6 +36,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public ProductListAdapter(Context context, List<ProductList_Data> al) {
         this.context = context;
         this.al = al;
+
     }
 
     @Override
@@ -48,7 +54,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 .into(holder.Img);
         holder.txt1.setText(al.get(position).getName());
         holder.txt2.setText(al.get(position).getProducer());
-        holder.txt3.setText("Rs. "+al.get(position).getCost());
+        holder.txt3.setText("Rs. " + al.get(position).getCost());
         holder.ratingBar.setRating(al.get(position).getRating().floatValue());
 
     }
@@ -60,10 +66,41 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return al.size();
     }
 
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ProductList_Data> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(al);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (ProductList_Data item : al) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            al.clear();
+            al.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView Img;
-        TextView txt1,txt2,txt3;
+        TextView txt1, txt2, txt3;
         RatingBar ratingBar;
 
 
@@ -73,7 +110,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             txt1 = (TextView) itemView.findViewById(R.id.nametextview);
             txt2 = (TextView) itemView.findViewById(R.id.desctextview);
             txt3 = (TextView) itemView.findViewById(R.id.pricetxtview);
-            ratingBar = (RatingBar)itemView.findViewById(R.id.ratingbar);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.ratingbar);
+
 
             context = itemView.getContext();
 
@@ -82,15 +120,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 public void onClick(View view) {
 
                     int itemPosition = getLayoutPosition();
-                   // Toast.makeText(context, "" + itemPosition, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context,ProductDetailed.class);
+                    // Toast.makeText(context, "" + itemPosition, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, ProductDetailed.class);
 //                    intent.putExtra("name",""+android.get(itemPosition).getOffer());
-                   intent.putExtra("product id",""+al.get(itemPosition).getId());
-                   intent.putExtra("image",""+al.get(itemPosition).getProductImages());
-                   Log.d("saurabh","item  position"+itemPosition);
+                    intent.putExtra("product id", "" + al.get(itemPosition).getId());
+                    intent.putExtra("image", "" + al.get(itemPosition).getProductImages());
+                    Log.d("saurabh", "item  position" + itemPosition);
                     context.startActivity(intent);
                 }
             });
+
+
         }
     }
 }

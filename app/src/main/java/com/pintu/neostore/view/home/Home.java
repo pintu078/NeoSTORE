@@ -1,4 +1,4 @@
-package com.pintu.neostore.home;
+package com.pintu.neostore.view.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,12 +24,12 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.pintu.neostore.R;
 import com.pintu.neostore.adapter.ViewPagerAdapter;
-import com.pintu.neostore.drawer.MyAccount.MyAccount;
-import com.pintu.neostore.drawer.mycart.MyCart;
-import com.pintu.neostore.drawer.order.OrderList;
-import com.pintu.neostore.drawer.store_locator.StoreLocator;
-import com.pintu.neostore.drawer.tabel.Tables;
-import com.pintu.neostore.login.Login;
+import com.pintu.neostore.view.drawer.MyAccount.MyAccount;
+import com.pintu.neostore.view.drawer.mycart.MyCart;
+import com.pintu.neostore.view.drawer.order.OrderList;
+import com.pintu.neostore.view.drawer.store_locator.StoreLocator;
+import com.pintu.neostore.view.drawer.tabel.Tables;
+import com.pintu.neostore.view.login.Login;
 import com.pintu.neostore.model.fetch.Data;
 import com.pintu.neostore.viewmodel.FetchVM;
 import com.pintu.neostore.viewmodel.FetchVMFactory;
@@ -59,7 +59,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     int[] images = {R.drawable.beds, R.drawable.sofas, R.drawable.cupboards, R.drawable.tabels, R.drawable.chairs};
 
     ImageView headerImg;
-    TextView header_Name, header_email,notification;
+    TextView header_Name, header_email,notification,tv_Img;
     ViewPagerAdapter mViewPagerAdapter;
 
     String token;
@@ -75,7 +75,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView = findViewById(R.id.nav_view);
         View headerContainer = navigationView.getHeaderView(0);
         toolbar = findViewById(R.id.toolbar);
+
         indicator = (TabLayout) findViewById(R.id.indicator);
+        tv_Img = (TextView) headerContainer.findViewById(R.id.tv_img);
         headerImg = (ImageView) headerContainer.findViewById(R.id.header_img);
         header_Name = (TextView) headerContainer.findViewById(R.id.header_name);
         header_email = (TextView) headerContainer.findViewById(R.id.header_email);
@@ -104,24 +106,37 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new SliderTimer(), 2000, 4000);
 
+
+
         sp = getSharedPreferences(Login.PREFS_NAME, MODE_PRIVATE);
-        header_Name.setText(sp.getString("FName", "") + " " + sp.getString("LName", ""));
-        header_email.setText(sp.getString("Email", ""));
         token = sp.getString("Token", "");
         Log.d("saurabh", "token " + token);
+        header_Name.setText(sp.getString("FName", "") + " " + sp.getString("LName", ""));
+        header_email.setText(sp.getString("Email", ""));
 
-        final String image = sp.getString("Profile", "");
+        String image = sp.getString("Profile", "");
         Log.d("saurabh", "image " + image);
+
+        if (!image.equals("null")) {
+            Picasso.with(getApplicationContext())
+                    .load(image)
+                    .fit()
+                    .into(headerImg);
+            tv_Img.setVisibility(View.INVISIBLE);
+        }else{
+            tv_Img.setVisibility(View.VISIBLE);
+            String fini=(sp.getString("FName","")).toUpperCase();
+            String lini=(sp.getString("LName","")).toUpperCase();
+            String initials=fini.substring(0,1)+lini.substring(0,1);
+
+            tv_Img.setText(initials);
+        }
 
 //        TextDrawable drawable = TextDrawable.builder().buildRect("A", Color.RED);
 //        headerImg.setImageDrawable(drawable);
-        if (!image.equals("")) {
-            Picasso.with(getApplicationContext())
-                    .load(image)
-                    .noFade()
-                    .fit()
-                    .into(headerImg);
-        }
+
+
+
 
 
         /*----------------------Navigation Drawer Menu-------------------------*/
@@ -150,10 +165,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             public void onChanged(Data data) {
                 if(data != null){
                     Log.d("saurabh","succes home");
-                    sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
+
+                    String carts = data.getTotalCarts().toString();
+                  //  sp = getSharedPreferences(Login.PREFS_NAME,MODE_PRIVATE);
                     editor = sp.edit();
-                    editor.putString("cart", data.getTotalCarts().toString());
+                    editor.putString("cart", carts);
+
                     editor.commit();
+
                     String quantity = sp.getString("cart","");
 
                     if(quantity.equals("0")){
@@ -166,6 +185,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
         fetchVM.loadFetchList(token);
+
     }
 
     @Override
@@ -241,13 +261,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         header_Name.setText(sp.getString("FName", "") + " " + sp.getString("LName", ""));
         header_email.setText(sp.getString("Email", ""));
         String image = sp.getString("Profile", "");
-        if (!image.equals("")) {
+        if (!image.equals("null")) {
             Picasso.with(getApplicationContext())
                     .load(image)
                     .fit()
                     .into(headerImg);
-            fetchVM.loadFetchList(token);
+            tv_Img.setVisibility(View.INVISIBLE);
+        }else{
+            tv_Img.setVisibility(View.VISIBLE);
+            String fini=(sp.getString("FName","")).toUpperCase();
+            String lini=(sp.getString("LName","")).toUpperCase();
+            String initials=fini.substring(0,1)+lini.substring(0,1);
+
+            tv_Img.setText(initials);
         }
+        fetchVM.loadFetchList(token);
         Log.d("saurabh","token-- "+token);
     }
 }

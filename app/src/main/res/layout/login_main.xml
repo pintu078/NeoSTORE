@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundRed"
-    tools:context=".login.Login">
+    tools:context=".view.login.Login">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:background="#fe3f3f"
         android:paddingBottom="20dp"
         android:scrollbars="vertical"
-        tools:context=".login.Login">
+        tools:context=".view.login.Login">
 
         <TextView
             android:id="@+id/tv_neoStore"
@@ -122,8 +122,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="205dp"
-            android:layout_marginBottom="30dp"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center_horizontal"
             android:text="DONT HAVE AN ACCOUNT ?"
             android:textColor="@color/textColor"
@@ -161,8 +161,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:layout_marginBottom="30dp"
-            android:visibility="gone"
             android:indeterminateTint="@color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/tv_forgot_pas_link"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

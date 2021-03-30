@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pintu.neostore.home.Home;
+import com.pintu.neostore.view.home.Home;
 
 public class FetchVMFactory extends ViewModelProvider.NewInstanceFactory {
 
