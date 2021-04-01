@@ -59,17 +59,15 @@
 
             <EditText
                 android:id="@+id/ed_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="122dp"
+                android:layout_height="46dp"
                 android:layout_below="@id/entr_quan"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
-                android:hint="enter quantity"
                 android:inputType="number"
                 android:textColor="@color/Medium_Black"
                 android:background="@drawable/stroke_box_green"
                 android:gravity="center"
-                android:padding="10dp"
                 android:textSize="20sp" />
 
             <Button

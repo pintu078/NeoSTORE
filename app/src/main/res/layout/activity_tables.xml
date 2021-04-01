@@ -8,40 +8,31 @@
     android:orientation="vertical"
     tools:context=".view.drawer.tabel.Tables">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/titleBar">
-
-        <ImageButton
-            android:id="@+id/imgbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/titleBar"
-            android:src="@drawable/ic_back_button" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_Barr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:gravity="center"
-            android:text="Tabels"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:background="@color/titleBar">
+
+            <ImageButton
+                android:id="@+id/imgbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/titleBar"
+                android:src="@drawable/ic_back_button" />
 
 
-        </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:text="Tabels"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
-    </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"

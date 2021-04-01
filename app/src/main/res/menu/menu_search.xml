@@ -2,11 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.drawer.tabel.Tables">
+    tools:context=".view.drawer.tabel.Tables"
+  >
     <item
         android:id="@+id/search"
+        android:layout_marginRight="40dp"
+        android:gravity="center"
         android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
         android:title="Search"
-        app:actionViewClass="android.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 </menu>

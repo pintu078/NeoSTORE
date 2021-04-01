@@ -2,16 +2,13 @@ package com.pintu.neostore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -24,18 +21,20 @@ import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.MyViewHolder> implements Filterable {
 
 
     List<ProductList_Data> al;
+    List<ProductList_Data> al_filter;
     Context context;
 
     public ProductListAdapter(Context context, List<ProductList_Data> al) {
         this.context = context;
         this.al = al;
+        this.al_filter = new ArrayList<>(al);
 
     }
 
@@ -66,33 +65,36 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return al.size();
     }
 
+    @Override
     public Filter getFilter() {
-        return exampleFilter;
+        return filter;
     }
-
-    private Filter exampleFilter = new Filter() {
+    Filter filter = new Filter() {
+        // run on background thread
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+
             List<ProductList_Data> filteredList = new ArrayList<>();
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(al);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (ProductList_Data item : al) {
-                    if (item.getName().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(item);
+
+            if(constraint.toString().isEmpty()){
+                filteredList.addAll(al_filter);
+            }else{
+                for(ProductList_Data list : al_filter){
+                    if(list.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                        filteredList.add(list);
                     }
                 }
             }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
 
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+        //runs on ui thread
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             al.clear();
-            al.addAll((List) results.values);
+            al.addAll((Collection<? extends ProductList_Data>) results.values);
             notifyDataSetChanged();
         }
     };

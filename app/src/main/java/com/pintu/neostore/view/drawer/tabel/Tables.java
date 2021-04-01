@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.widget.SearchView;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -31,12 +32,11 @@ public class Tables extends AppCompatActivity {
 
     NestedScrollView nestedScrollView;
     public static ProgressBar progressBar;
+    Toolbar toolbar;
     RecyclerView recyclerView;
     private TabelsVM tabelsVM;
     ProductListAdapter productListAdapter;
-    EditText inputSearch;
-    Boolean isScrolling = false;
-    int currentItems, totalItems, scrollOutItems;
+
     ArrayList<ProductList_Data> list1 = new ArrayList<>();
     String id = "1";
     Integer li = 10;
@@ -44,13 +44,15 @@ public class Tables extends AppCompatActivity {
 
 //    List<Item> items = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tables);
+        toolbar = (Toolbar) findViewById(R.id.tool_Barr);
+        setSupportActionBar(toolbar);
+
         ImageButton imgbtn = findViewById(R.id.imgbtn);
-        inputSearch = findViewById(R.id.input_search);
+      //  inputSearch = findViewById(R.id.input_search);
 
         nestedScrollView = findViewById(R.id.scroll_view);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -66,7 +68,6 @@ public class Tables extends AppCompatActivity {
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        // tabelsVM.loadProductLists("1",10,1);
 
         tabelsVM = ViewModelProviders.of(this).get(TabelsVM.class);
         tabelsVM.getTableListObserver().observe(this, new Observer<List<ProductList_Data>>() {
@@ -143,36 +144,24 @@ public class Tables extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+       getMenuInflater().inflate(R.menu.menu_search, menu);
 
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
-        search(searchView);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void search(SearchView searchView) {
-
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 productListAdapter.getFilter().filter(newText);
-                return true;
+                return false;
             }
         });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
 

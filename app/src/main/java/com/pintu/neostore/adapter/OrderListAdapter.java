@@ -6,25 +6,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pintu.neostore.R;
+import com.pintu.neostore.model.ProductList_Data;
 import com.pintu.neostore.view.drawer.order.OrderDetails;
 import com.pintu.neostore.model.order.Order_List.Datum;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyViewHolder> {
+public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyViewHolder> implements Filterable {
 
 
     List<Datum> al;
+    List<Datum> al_filter;
     Context context;
 
     public OrderListAdapter(Context context, List<Datum> al) {
         this.context = context;
         this.al = al;
+        this.al_filter = new ArrayList<>(al);
     }
 
     @Override
@@ -49,6 +56,40 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyVi
         System.out.println(al.size());
         return al.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+    Filter filter = new Filter() {
+        // run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Datum> filteredList = new ArrayList<>();
+
+            if(constraint.toString().isEmpty()){
+                filteredList.addAll(al_filter);
+            }else{
+                for(Datum list : al_filter){
+                    if(list.getId().toString().contains(constraint.toString())){
+                        filteredList.add(list);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+        //runs on ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            al.clear();
+            al.addAll((Collection<? extends Datum>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
