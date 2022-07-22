@@ -83,6 +83,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         header_email = (TextView) headerContainer.findViewById(R.id.header_email);
         //Menu counter = navigationView.getMenu();
         //notification = (TextView) counter.findItem(R.id.tv_notification);
+        // mycart item notification
         notification = (TextView) navigationView.getMenu().findItem(R.id.nav_myCart).getActionView();
 
 //        private void setMenuCounter(@IdRes int itemId, int count) {

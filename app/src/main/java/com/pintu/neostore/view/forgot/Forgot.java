@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class Forgot extends AppCompatActivity {
 
     private APIMsg message;
 
-    TextView Email;
+    EditText Email;
     public static Button Submit;
     public static ProgressBar progressBar;
 
@@ -38,7 +39,7 @@ public class Forgot extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.forgot_main);
 
-        Email = (TextView) findViewById(R.id.ed_email);
+        Email = (EditText) findViewById(R.id.ed_email);
         Submit = (Button) findViewById(R.id.btn_submit);
         progressBar =(ProgressBar)findViewById(R.id.progress_bar);
 
